@@ -42,7 +42,7 @@ class IdeaCard {
 
         function OnMouseDown(ev) {
             if(scope.containerElement) {
-                scope.containerElement.removeEventListener("mousedown", OnMouseDown);
+                scope.cardElement.removeEventListener("mousedown", OnMouseDown);
                 scope.containerElement.addEventListener("mousemove", OnMouseMove);
                 scope.containerElement.addEventListener("mouseup", OnMouseUp);
 
@@ -59,7 +59,7 @@ class IdeaCard {
             if(scope.containerElement) {
                 scope.containerElement.removeEventListener("mousemove", OnMouseMove);
                 scope.containerElement.removeEventListener("mouseup", OnMouseUp);
-                scope.containerElement.addEventListener("mousedown", OnMouseDown);
+                scope.cardElement.addEventListener("mousedown", OnMouseDown);
             }
         }
 
