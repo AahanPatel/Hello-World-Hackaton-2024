@@ -55,8 +55,29 @@ class IdeaCard {
         this.addMovementEvents();
         this.addResizeEvents();
         this.addEditEvents();
+        this.addHoverEvents()
     }
 
+    addHoverEvents() {
+        const scope = this; 
+
+        function OnMouseEnter() {
+            scope.cardElement.removeEventListener("mouseenter", OnMouseEnter);
+            scope.cardElement.addEventListener("mouseleave", OnMouseExit);
+            scope.nodes.appendNodes(scope)
+        }
+
+        function OnMouseExit() {
+            scope.nodes.dissolveNodes()
+            scope.cardElement.removeEventListener("mouseleave", OnMouseExit);
+            scope.cardElement.addEventListener("mouseenter", OnMouseEnter);
+        }
+
+        this.cardElement.addEventListener("mouseenter", OnMouseEnter);
+        this.addResizeEvents();
+        this.addEditEvents();
+    }
+    
     addMovementEvents() {
         const scope = this;
         let sc = 0;
