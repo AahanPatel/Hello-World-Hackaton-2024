@@ -96,3 +96,42 @@ class SolidArrow extends Arrow {
         this.arrowElement.setAttribute("d", `M ${startX}, ${startY} L ${endX}, ${endY} M ${endX}, ${endY} L ${pt1x}, ${pt1y} M ${endX}, ${endY} L ${pt2x}, ${pt2y}`);
     }
 }
+
+class DashedArrow extends Arrow {
+    constructor(dashSize = DEFAULT_DASH_SIZE) {
+        super();
+        this.dashSize = dashSize;
+    }
+
+    _recalculateArrow() {
+        const [startX, startY] = this._startPoint;
+        const [endX, endY] = this._endPoint;
+
+        let dx = endX - startX;
+        let dy = endY - startY;
+
+        let ang = Math.atan2(dy, dx);
+        let mag = Math.hypot(dx, dy);
+
+        let dirX = Math.cos(ang);
+        let dirY = Math.sin(ang);
+
+        const low = ang - ARROW_HEAD_ANGLE_RADIANS;
+        const high = ang + ARROW_HEAD_ANGLE_RADIANS;
+
+        const pt1x = endX - Math.cos(low) * ARROW_HEAD_LENGTH;
+        const pt1y = endY - Math.sin(low) * ARROW_HEAD_LENGTH;
+
+        const pt2x = endX - Math.cos(high) * ARROW_HEAD_LENGTH;
+        const pt2y = endY - Math.sin(high) * ARROW_HEAD_LENGTH;
+
+        let pathStr = `M ${startX}, ${startY}`;
+
+        let numSteps = Math.round(mag / (2 * this.dashSize));
+
+        for(let i = 0; i < numSteps; i++) {
+            pathStr += `l ${dirX * this.dashSize}, ${dirY * this.dashSize} m ${dirX * this.dashSize}, ${dirY * this.dashSize}`;
+        }
+        this.arrowElement.setAttribute("d", `${pathStr} M ${endX}, ${endY} L ${pt1x}, ${pt1y} M ${endX}, ${endY} L ${pt2x}, ${pt2y}`);
+    }
+}
