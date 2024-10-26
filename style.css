@@ -42,6 +42,7 @@ body, html {
     justify-content: center;
     color: #363636;
     outline: 1vh black;
+    transition: 0.25s ease;
 }
 
 .header-right { /*Header right side*/
@@ -102,6 +103,20 @@ body, html {
 
 .submenu-option {
     display: flex;
+    cursor: pointer;
+}
+
+.submenu-option:first-child {
+    border-radius: 0vh 1vh 0vh 0vh;
+}
+
+.submenu-option:last-child {
+    border-radius: 0vh 0vh 1vh 1vh;
+
+}
+
+.submenu-option:hover {
+    background-color: rgb(228, 228, 228);
 }
 
 .submenu-option i {
@@ -323,27 +338,32 @@ footer {
 
 .add-circle-container {
     position: fixed;
-    bottom: 40px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;  
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    transition: .25s ease-in;
-}
-
-.add-circle-container ion-icon {
-    font-size: 50px;  
-    color: black; 
+    transition: .15s;
+    font-size: 5vh;
+    color: white;
+    background-color: #80A1D1;
+    user-select: none;
 }
 
 .add-circle-container:hover {
     transform: scale(115%);
-    color: black; 
+    background-color: #6f8ab4;
 }
+
+.add-circle-container:active {
+    transform: scale(100%);
+    background-color: #546888;
+}
+
 
 

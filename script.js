@@ -46,6 +46,16 @@ function main() {
         resetMenus(menuItems, submenuGroups);
     });
 
+    // Submenu options
+    const header = document.querySelector(".header-container");
+    document.getElementById("fullscreen").addEventListener("click", function(){
+        header.style.marginTop = "-5vh";
+    });
+
+    // document.querySelector(".return-header").addEventListener("click", function(){
+    //     header.style.marginTop = "";
+    // });
+
     
     const addButton = document.getElementsByClassName("add-circle-container")[0];
 
@@ -172,6 +182,7 @@ function main() {
     window.addEventListener('resize', toggleTextVisibility);
 }
 
+// Menu 
 function resetMenus(menuItems, submenuGroups) {
     menuItems.forEach(ele => {
         ele.style.borderRadius = "";
