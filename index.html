@@ -8,6 +8,7 @@
         <script src="https://sharonchoong.github.io/svg-exportJS/svg-export.min.js"></script>
         <script src="./items/IdeaCard.js"></script>
         <script src="./items/Arrows.js"></script>
+        <script src="./items/Nodes.js"></script>
         <script src="./items/File.js"></script>
         <link rel="stylesheet" href="style.css" />
     <head>
@@ -29,7 +30,9 @@
                 <div class="element-container">
                     <!-- Main SVG content -->
                     <input type="text" style="position:absolute; top:-500px;" id="title-input"/>
-                    <svg viewBox="0 0 500 500" style="width:1200px;height:800px;border:1px solid black;" id="whiteboard"></svg>
+                    <svg viewBox="0 0 500 500" style="width:1200px;height:800px;border:1px solid black;" id="whiteboard">
+                        <circle cx="5%" cy="5%" r="3" fill="#FF6961" fill-opacity="0.7" stroke-width="1" stroke="#FA544B" id="selectionNode" display="none"></circle>
+                    </svg>
                 </div>
             </div>
             <div class="add-circle-container">
