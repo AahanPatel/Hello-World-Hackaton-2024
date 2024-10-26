@@ -19,10 +19,25 @@ class IdeaCard {
         this.resizeElement.setAttribute("class", "idea-card-resize");
 
         this.groupElement.append(this.cardElement, this.titleElement, this.descriptionElement, this.resizeElement);
+
+        this.addEvents();
     }
 
     addTo(element) {
         element.appendChild(this.groupElement);
+    }
+
+    addEvents() {
+        addMovementEvents();
+        addResizeEvents()
+    }
+
+    addMovementEvents() {
+
+    }
+
+    addResizeEvents() {
+
     }
 
     get title() {
