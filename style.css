@@ -31,7 +31,7 @@ body, html {
     stroke: #ababab;          
     stroke-width: 1.5;          
     rx: 5px;            
-    transition: 0.25s ease-in;     
+    transition: 0.2s ease-out;     
 }
 
 .idea-card:hover {
