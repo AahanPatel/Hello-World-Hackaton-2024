@@ -1,7 +1,7 @@
 // Constants
 const MIN_CARD_WIDTH = 10;
 const MIN_CARD_HEIGHT = 10;
-const CARD_TITLE_PADDING = 1; // Distance on either side
+const CARD_TITLE_PADDING = 3; // Distance on either side
 const RESIZE_ELEMENT_LENGTH = 10;
 
 class IdeaCard {
@@ -41,9 +41,12 @@ class IdeaCard {
     set title(title) {
         this.titleElement.textContent = title;
 
-        const length = this.titleElement.getComputedTextLength();
+        const length = this.textLength;
         if(length > this.width - 2 * CARD_TITLE_PADDING) {
             this.width = length + 2 * CARD_TITLE_PADDING;
+        } else {
+            const textOffset = (this.width - length) / 2;
+            this.titleElement.setAttribute("x", this.x + textOffset);
         }
     }
 
@@ -60,8 +63,13 @@ class IdeaCard {
     }
 
     set width(width) {
-        width = Math.max(width, MIN_CARD_WIDTH);
+        const len = this.textLength;
+
+        width = Math.max(width, Math.max(MIN_CARD_WIDTH, len + 2 * CARD_TITLE_PADDING));
         this.cardElement.width.baseVal.value = width;
+
+        const textOffset = (this.width - len) / 2;
+        this.titleElement.setAttribute("x", this.x + textOffset);
         
         this.resizeElement.setAttribute("d", `M ${this.x + this.width},${this.y + this.height} l -${RESIZE_ELEMENT_LENGTH},0 l ${RESIZE_ELEMENT_LENGTH},-${RESIZE_ELEMENT_LENGTH} Z`);
     }
@@ -83,8 +91,11 @@ class IdeaCard {
 
     set x(x) {
         this.cardElement.x.baseVal.value = x;
-        this.titleElement.setAttribute("x", x + CARD_TITLE_PADDING);
-        this.resizeElement.setAttribute("d", `M ${this.x + this.width},${this.y + this.height} l -${RESIZE_ELEMENT_LENGTH},0 l ${RESIZE_ELEMENT_LENGTH},-${RESIZE_ELEMENT_LENGTH} Z`);
+        const len = this.textLength;
+        const textOffset = (this.width - len) / 2;
+        this.titleElement.setAttribute("x", x + textOffset);
+
+        this.resizeElement.setAttribute("d", `M ${x + this.width},${this.y + this.height} l -${RESIZE_ELEMENT_LENGTH},0 l ${RESIZE_ELEMENT_LENGTH},-${RESIZE_ELEMENT_LENGTH} Z`);
     }
 
     get y() {
@@ -95,5 +106,9 @@ class IdeaCard {
         this.cardElement.y.baseVal.value = y;
         this.titleElement.setAttribute("y", y + CARD_TITLE_PADDING);
         this.resizeElement.setAttribute("d", `M ${this.x + this.width},${this.y + this.height} l -${RESIZE_ELEMENT_LENGTH},0 l ${RESIZE_ELEMENT_LENGTH},-${RESIZE_ELEMENT_LENGTH} Z`);
+    }
+
+    get textLength() {
+        return this.titleElement.getComputedTextLength();
     }
 }
