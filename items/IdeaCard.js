@@ -127,11 +127,13 @@ class IdeaCard {
         }
 
         function OnMouseMove(ev) {
+            scope.nodes.dissolveNodes()
             scope.width += ev.movementX * sc;
             scope.height += ev.movementY * sc;
         }
 
         function OnMouseUp() {
+            scope.nodes.appendNodes(scope)
             if(scope.containerElement) {
                 scope.containerElement.removeEventListener("mousemove", OnMouseMove);
                 scope.containerElement.removeEventListener("mouseup", OnMouseUp);
