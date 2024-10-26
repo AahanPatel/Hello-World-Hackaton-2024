@@ -1,3 +1,11 @@
+// Constants
+const ARROW_HEAD_LENGTH = 15;
+const ARROW_HEAD_ANGLE = 30; // Degrees on either side of the shaft
+const DEFAULT_DASH_SIZE = 10;
+const DEFAULT_DOT_DISTANCE = 4;
+
+const ARROW_HEAD_ANGLE_RADIANS = ARROW_HEAD_ANGLE * Math.PI / 180; // DO NOT CHANGE THIS
+
 class Arrow {
     constructor() {
         this.arrowElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
