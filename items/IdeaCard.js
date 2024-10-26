@@ -3,7 +3,7 @@ const MIN_CARD_WIDTH = 10;
 const MIN_CARD_HEIGHT = 10;
 const CARD_TITLE_PADDING = 3; // Distance on either side
 
-const RESIZE_ELEMENT_LENGTH = 10;
+const RESIZE_ELEMENT_LENGTH = 12;
 const RESIZE_ELEMENT_BORDER_RADIUS = 5; // Pull from CSS
 const RESIZE_ELEMENT_BORDER_WIDTH = 1.5; // Pull from CSS
 
