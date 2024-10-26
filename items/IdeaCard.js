@@ -2,7 +2,10 @@
 const MIN_CARD_WIDTH = 10;
 const MIN_CARD_HEIGHT = 10;
 const CARD_TITLE_PADDING = 3; // Distance on either side
-const RESIZE_ELEMENT_LENGTH = 10;
+
+const RESIZE_ELEMENT_LENGTH = 12;
+const RESIZE_ELEMENT_BORDER_RADIUS = 5; // Pull from CSS
+const RESIZE_ELEMENT_BORDER_WIDTH = 1.5; // Pull from CSS
 
 class IdeaCard {
     constructor() {
@@ -34,7 +37,33 @@ class IdeaCard {
     }
 
     addMovementEvents() {
+        const scope = this;
+        let sc = 0;
 
+        function OnMouseDown(ev) {
+            if(scope.containerElement) {
+                scope.cardElement.removeEventListener("mousedown", OnMouseDown);
+                scope.containerElement.addEventListener("mousemove", OnMouseMove);
+                scope.containerElement.addEventListener("mouseup", OnMouseUp);
+
+                sc = scope.getScaleFactor();
+            }
+        }
+
+        function OnMouseMove(ev) {
+            scope.x += ev.movementX * sc;
+            scope.y += ev.movementY * sc;
+        }
+
+        function OnMouseUp() {
+            if(scope.containerElement) {
+                scope.containerElement.removeEventListener("mousemove", OnMouseMove);
+                scope.containerElement.removeEventListener("mouseup", OnMouseUp);
+                scope.cardElement.addEventListener("mousedown", OnMouseDown);
+            }
+        }
+
+        this.cardElement.addEventListener("mousedown", OnMouseDown);
     }
 
     addResizeEvents() {
@@ -42,21 +71,19 @@ class IdeaCard {
 
         let sc = 0;
 
-        function OnMouseDown() {
+        function OnMouseDown(ev) {
             if(scope.containerElement) {
                 scope.resizeElement.removeEventListener("mousedown", OnMouseDown);
                 scope.containerElement.addEventListener("mousemove", OnMouseMove);
                 scope.containerElement.addEventListener("mouseup", OnMouseUp);
                 sc = scope.getScaleFactor();
+                ev.stopPropagation();
             }
         }
 
         function OnMouseMove(ev) {
-            const dx = ev.movementX;
-            const dy = ev.movementY;
-
-            scope.width += dx * sc;
-            scope.height += dy * sc;
+            scope.width += ev.movementX * sc;
+            scope.height += ev.movementY * sc;
         }
 
         function OnMouseUp() {
@@ -89,6 +116,11 @@ class IdeaCard {
         } else {
             return viewHeight / styleHeight;
         }
+    }
+
+    getResizePathString() {
+        return `M ${this.x + this.width - RESIZE_ELEMENT_LENGTH + RESIZE_ELEMENT_BORDER_WIDTH / 2},${this.y + this.height - RESIZE_ELEMENT_BORDER_WIDTH / 2} h ${RESIZE_ELEMENT_LENGTH - RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2} a ${RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2},${RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2}, 0 0 0 ${RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2},-${RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2} v -${RESIZE_ELEMENT_LENGTH - RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2} Z`;
+        // return `M ${this.x + this.width - RESIZE_ELEMENT_LENGTH},${this.y + this.height} h ${RESIZE_ELEMENT_LENGTH - RESIZE_ELEMENT_BORDER_RADIUS} a ${RESIZE_ELEMENT_BORDER_RADIUS},${RESIZE_ELEMENT_BORDER_RADIUS} 0 0 0 ${RESIZE_ELEMENT_BORDER_RADIUS},-${RESIZE_ELEMENT_BORDER_RADIUS} v ${RESIZE_ELEMENT_LENGTH - RESIZE_ELEMENT_BORDER_RADIUS} Z`;
     }
 
     get title() {
@@ -128,7 +160,7 @@ class IdeaCard {
         const textOffset = (this.width - len) / 2;
         this.titleElement.setAttribute("x", this.x + textOffset);
         
-        this.resizeElement.setAttribute("d", `M ${this.x + this.width},${this.y + this.height} l -${RESIZE_ELEMENT_LENGTH},0 l ${RESIZE_ELEMENT_LENGTH},-${RESIZE_ELEMENT_LENGTH} Z`);
+        this.resizeElement.setAttribute("d", this.getResizePathString());
     }
 
     get height() {
@@ -139,7 +171,7 @@ class IdeaCard {
         height = Math.max(height, MIN_CARD_HEIGHT);
         this.cardElement.height.baseVal.value = height;
 
-        this.resizeElement.setAttribute("d", `M ${this.x + this.width},${this.y + this.height} l -${RESIZE_ELEMENT_LENGTH},0 l ${RESIZE_ELEMENT_LENGTH},-${RESIZE_ELEMENT_LENGTH} Z`);
+        this.resizeElement.setAttribute("d", this.getResizePathString());
     }
 
     get x() {
@@ -152,7 +184,7 @@ class IdeaCard {
         const textOffset = (this.width - len) / 2;
         this.titleElement.setAttribute("x", x + textOffset);
 
-        this.resizeElement.setAttribute("d", `M ${x + this.width},${this.y + this.height} l -${RESIZE_ELEMENT_LENGTH},0 l ${RESIZE_ELEMENT_LENGTH},-${RESIZE_ELEMENT_LENGTH} Z`);
+        this.resizeElement.setAttribute("d", this.getResizePathString());
     }
 
     get y() {
@@ -162,7 +194,7 @@ class IdeaCard {
     set y(y) {
         this.cardElement.y.baseVal.value = y;
         this.titleElement.setAttribute("y", y + CARD_TITLE_PADDING);
-        this.resizeElement.setAttribute("d", `M ${this.x + this.width},${this.y + this.height} l -${RESIZE_ELEMENT_LENGTH},0 l ${RESIZE_ELEMENT_LENGTH},-${RESIZE_ELEMENT_LENGTH} Z`);
+        this.resizeElement.setAttribute("d", this.getResizePathString());
     }
 
     get textLength() {
