@@ -12,14 +12,20 @@ class IdeaCard {
         this.descriptionElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
         this.resizeElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
-        this.cardElement.setAttribute("fill", "white");
-        this.cardElement.setAttribute("stroke", "black");
+        this.groupElement.setAttribute("class", "group-element");
+        this.cardElement.setAttribute("class", "idea-card");
+        this.titleElement.setAttribute("class", "idea-card-title");
+        this.descriptionElement.setAttribute("class", "idea-card-description");
+        this.resizeElement.setAttribute("class", "idea-card-resize");
 
-        this.titleElement.setAttribute("fill", "black");
-        this.titleElement.setAttribute("dominant-baseline", "hanging");
+        // this.cardElement.setAttribute("fill", "white");
+        // this.cardElement.setAttribute("stroke", "black");
 
-        this.resizeElement.setAttribute("fill", "grey");
-        this.resizeElement.setAttribute("stroke", "none");
+        // this.titleElement.setAttribute("fill", "black");
+        // this.titleElement.setAttribute("dominant-baseline", "hanging");
+
+        // this.resizeElement.setAttribute("fill", "grey");
+        // this.resizeElement.setAttribute("stroke", "none");
 
         this.groupElement.append(this.cardElement, this.titleElement, this.descriptionElement, this.resizeElement);
     }

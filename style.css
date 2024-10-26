@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header-container {
+    background-color: #cce4e2;
+    height: 6vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.idea-card {
+    fill: rgb(249, 252, 252);         
+    stroke: #ababab;          
+    stroke-width: 1.5;          
+    rx: 5px;            
+    transition: 0.25s ease-in;     
+}
+
+.idea-card:hover {
+    fill: rgb(233, 243, 243);  
+}
+
+.group-element {
+    transition: 0.5s ease-in;
+}
+
+.idea-card-title {
+    font-size: 16px;
+    font-weight: bold;
+    fill: #333;              
+    padding: 10px;
+    dominant-baseline: hanging;
+}
+
+.idea-card-description {
+    font-size: 14px;
+    fill: #555;
+    padding: 4px;
+}
+
+.idea-card-resize {
+    fill: grey;              
+    cursor: nwse-resize;       
+}
+
+.sidebar-container {
+    display: flex;
+    width: 14vw;
+    background-color: #333;
+    justify-content: space-between;
+    color: white;
+    padding: 1em;
+}
+
+.element-container {
+    flex: 1;
+    padding: 1em;
+    background-color: #f4f4f4;
+}
+
+.content-wrapper {
+    display: flex;
+    flex: 1;
+}
+
+footer {
+    background-color: #ccc;
+    text-align: center;
+    padding: 1em;
+}
+
+.add-circle-container {
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: .25s ease-in;
+}
+
+.add-circle-container ion-icon {
+    font-size: 50px;  
+    color: black; 
+}
+
+.add-circle-container:hover {
+    transform: scale(115%);
+    color: black; 
+}
+
+.sidebar-container h1 {
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.minimize-icon-container ion-icon {
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    transition: .5s ease-out;
+}
+
+.minimize-icon-container ion-icon:hover {
+    transform: scale(120%);
+}
+
