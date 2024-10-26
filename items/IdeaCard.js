@@ -24,12 +24,13 @@ class IdeaCard {
     }
 
     addTo(element) {
+        this.containerElement = element;
         element.appendChild(this.groupElement);
     }
 
     addEvents() {
-        addMovementEvents();
-        addResizeEvents()
+        this.addMovementEvents();
+        this.addResizeEvents()
     }
 
     addMovementEvents() {
@@ -37,7 +38,57 @@ class IdeaCard {
     }
 
     addResizeEvents() {
+        const scope = this;
 
+        let sc = 0;
+
+        function OnMouseDown() {
+            if(scope.containerElement) {
+                scope.resizeElement.removeEventListener("mousedown", OnMouseDown);
+                scope.containerElement.addEventListener("mousemove", OnMouseMove);
+                scope.containerElement.addEventListener("mouseup", OnMouseUp);
+                sc = scope.getScaleFactor();
+            }
+        }
+
+        function OnMouseMove(ev) {
+            const dx = ev.movementX;
+            const dy = ev.movementY;
+
+            scope.width += dx * sc;
+            scope.height += dy * sc;
+        }
+
+        function OnMouseUp() {
+            if(scope.containerElement) {
+                scope.containerElement.removeEventListener("mousemove", OnMouseMove);
+                scope.containerElement.removeEventListener("mouseup", OnMouseUp);
+                scope.resizeElement.addEventListener("mousedown", OnMouseDown);
+            }
+        }
+
+        this.resizeElement.addEventListener("mousedown", OnMouseDown);
+    }
+
+    getScaleFactor() {
+        if(!this.containerElement)
+            return 0;
+
+        const viewbox = this.containerElement.getAttribute("viewBox");
+        if(!viewbox)
+            return 0;
+
+        const [,,viewWidth, viewHeight] = viewbox.split(" ").map((v) => parseInt(v));
+        const compStyle = window.getComputedStyle(this.containerElement);
+
+        const styleWidth = parseInt(compStyle.width.replace("px", ""));
+        const styleHeight = parseInt(compStyle.height.replace("px", ""));
+
+        if(styleWidth < styleHeight) {
+            return viewWidth / styleWidth;
+        } else {
+            return viewHeight / styleHeight;
+        }
     }
 
     get title() {
