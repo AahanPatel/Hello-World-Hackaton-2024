@@ -6,7 +6,10 @@
 
 body, html {
     height: 100%;
+    margin: 0;
     font-family: Arial, sans-serif;
+    top: 0vh;
+    overflow: hidden;
 }
 
 .main-container {
@@ -15,24 +18,123 @@ body, html {
     height: 100vh;
 }
 
+.content-wrapper {
+    display: flex;
+    flex: 1;
+}
+
+/* Global Classes */
+.push:active {
+    transition: 0.1s;
+    filter: brightness(0.9);
+}
+
+.push:hover {
+    cursor: pointer;
+}
+
+/* Header Content */
+
 .header-container {
-    background-color: #cce4e2;
-    height: 6vh;
+    background-color: #D9E4F4;
     width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: white;
+    color: #363636;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.header-right { /*Header right side*/
+    margin-left:50vw;
+    width: 50vw;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logo-container {
+    height: 4.25vh;
+    margin-top: 0.75vh; /*fix when placing actual logo. svgs are weird (that or im stupid)*/
+    margin-right: 1vw;
+}
+
+.header-menu { /*Header left side*/
+    width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 0.5vw;
+}
+
+.menu {
+    width: 4vw;
+    margin-top: 0.75vh;
+    line-height: 3.5vh;
+    height: 3.5vh;
+    text-align: center;
+    user-select: none;
+    font-size: 1.7vh;
+    border-radius: 1vh;
+    transition: backgroundColor 0.1s;
+    background-color: transparent;
+    border: none;
+}
+
+.menu:hover {
+    background-color: #AABEDB;
+}    
+
+.header-submenu{
+    position: absolute;
+    left: 6.5vw;
+    top:4vh;
+    display: flex;
+}
+.submenu{
+    width: 14vw;
+    margin-left: -6vw;
+    background-color: white;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.463), 10px 10px 10px 0px rgba(0, 0, 0, 0.184);
+    flex-wrap: wrap;
+    border-radius: 0vh 1vh 1vh 1vh;
+    line-height: 4vh;
+    font-size: 1.7vh;
+    font-weight: 500;
+}
+
+.submenu-option {
+    display: flex;
+}
+
+.submenu-option i {
+    flex-wrap: wrap;
+    width: 2vw;
+    font-size: 2vh;
+    height: 4vh;
+    text-align: center;
+    line-height: 4vh;
+}
+
+.submenu-option p1 {
+    flex-wrap: wrap;
+    width: 8vw;
+} 
+
+.submenu-option p2 {
+    width: 3vw;
+    float: right;
+    text-align: right;
+    opacity: 0.3;
+    font-size: 1.3vh;
+    font-weight: 700;
+} 
+
+/* End Header Content */
 
 .idea-card {
     fill: rgb(249, 252, 252);         
     stroke: #ababab;          
     stroke-width: 1.5;          
     rx: 5px;            
-    transition: fill 0.25s ease-in;
-    transition: transform 0.1 cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: fill 0.2s ease-out;
 }
 
 .idea-card:hover {
@@ -64,22 +166,146 @@ body, html {
 
 .sidebar-container {
     display: flex;
-    width: 14vw;
-    background-color: #333;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: flex-start;
+    min-width: 80px;
+    background-color: rgb(230, 237, 245);
     color: white;
-    padding: 1em;
+    padding: .7em;
+    border-right: solid rgb(176, 184, 195) 5px;
+    height: 100%; 
+    position: relative;
+    flex-wrap: nowrap;
+}
+
+.sidebar-header {
+    width: 100%;
+}
+
+.sidebar-container h1 {
+    color: rgb(33, 33, 33);
+    font-size: 15px;
+    text-align: center;
+}
+
+.sidebar-container hr {
+    width: 100%;
+    height: 4px;
+    background-color: rgb(176, 184, 195);
+    border-radius: 10%;
+}
+
+.group-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    text-align: left;
+    margin: none;
+    padding: 3px 3px 3px 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.group-element-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex: none;
+    margin: 3px 5px; 
+    padding: 10px;
+    flex: 1; 
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: margin .5s ease-out;
+}
+
+.group-element-container .element-icon {
+    margin-right: 10px;
+    flex: none;
+    width: 25px;
+    height: 25px;
+    border: solid black 3px;
+    background-color: red;
+    border-radius: 35%;
+    transition: transform .5s ease-out;
+}
+
+.group-element-container:hover .element-icon {
+    transform: rotateZ(45deg) scale(105%);
+}
+
+.group-element-container:hover {
+    background-color: rgb(255, 255, 255);
+    margin: 8px 5px;
+}
+
+.group-element-container .element-title {
+    margin: 0;
+    text-align: left;
+    font-size: 1vw;
+}
+
+.group-element-container ion-icon {
+    color: black;
+    font-size: 20px;
+    margin-left: auto;
+    transition: .25s ease-out;
+}
+
+.group-element-container ion-icon:hover {
+    font-size: 25px;
+    transform: rotateZ(-10deg);
+}
+
+.minimize-icon-container {
+    position: absolute; 
+    height: 60px; 
+    width: 12px; 
+    top: 50%;
+    right: -12px; 
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    cursor: pointer; 
+    background-color: rgb(176, 184, 195);
+    border-radius: 15px;
+    max-height: 90px; 
+    max-width: 25px;
+    overflow: hidden; 
+    transition: .2s ease-out;
+}
+
+.minimize-icon-container:hover {
+    height: 90px;
+}
+
+.minimize-icon-container ion-icon {
+    font-size: 100px;
+    color: black;
+    opacity: 0.3;
+    transition: 0.4s ease-out;
+}
+
+.minimize-icon-container:hover ion-icon {
+    font-size: 80px;
+    opacity: 1;
+}
+
+ion-icon {
+    transform: rotateZ(0deg);
 }
 
 .element-container {
     flex: 1;
     padding: 1em;
     background-color: #f4f4f4;
-}
-
-.content-wrapper {
-    display: flex;
-    flex: 1;
 }
 
 footer {
@@ -113,20 +339,4 @@ footer {
     color: black; 
 }
 
-.sidebar-container h1 {
-    color: white;
-    font-size: 1.5em;
-    text-align: center;
-}
-
-.minimize-icon-container ion-icon {
-    font-size: 20px;
-    color: white;
-    cursor: pointer;
-    transition: .5s ease-out;
-}
-
-.minimize-icon-container ion-icon:hover {
-    transform: scale(120%);
-}
 

@@ -11,21 +11,141 @@
         <script src="./items/Nodes.js"></script>
         <script src="./items/File.js"></script>
         <link rel="stylesheet" href="style.css" />
+        <script src="https://kit.fontawesome.com/fbbd0c2358.js" crossorigin="anonymous"></script>  <!--Temp remove maybe-->
     <head>
     <body>
         <div class="main-container">
-            <header class="header-container">
-                <div class="logo-container">
-                    
+            <header class="header-container" style="z-index: 10000;">
+                <div class="header-menu">
+                    <div class="menu push">File</div>
+                    <div class="menu push">Tools</div>
+                    <div class="menu push">View</div>
+                    <div class="menu push">Help</div>
                 </div>
+
+                <div class="header-submenu">
+                    <div class="submenu file">
+                        <div class="submenu-option">
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>New</p1>
+                            <p2>Ctrl + N</p2>
+                        </div>
+                        <div class="submenu-option">
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Open</p1>
+                            <p2>Ctrl + O</p2>
+                        </div>
+                        <div class="submenu-option">
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Copy</p1>
+                        </div>
+
+                        <div class="submenu-divider"></div>
+
+                        <div class="submenu-option">
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Email</p1>
+                        </div>
+                        <div class="submenu-option">                            
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Save</p1>
+                            <p2>Ctrl + S</p2>
+                        </div>
+                        <div class="submenu-option">
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Print</p1>
+                            <p2>Ctrl + P</p2>
+                        </div>
+
+                        <div class="submenu-divider"></div>
+
+                        <div class="submenu-option">
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Rename</p1>
+                        </div>
+                        <div class="submenu-option">                            
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Delete</p1>
+                        </div>
+                    </div>
+                    <div class="submenu tools" style="margin-left: -2vw;">
+                        <div class="submenu-option">                       
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Auto Format</p1>
+                        </div>               
+                        <div class="submenu-option">                            
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Form Connections</p1>
+                        </div>
+                    </div>
+                    <div class="submenu view" style="margin-left: 2vw;">
+                        <div class="submenu-option">
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Zoom In</p1>
+                        </div>
+                        <div class="submenu-option">
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Zoom Out</p1>
+                        </div>
+
+                        <div class="submenu-divider"></div>
+
+                        <div class="submenu-option">
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>Fullscreen</p1>
+                        </div>
+                    </div>
+                    <div class="submenu help" style="margin-left: 6vw;">
+                        <div class="submenu-option">
+                            <i class="fa-solid fa-hippo"></i>
+                            <p1>AHHHHHHHHHH!</p1>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class = "header-right">
+                    <div class="logo-container">
+                        <!-- Logo Place holder -->
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="14" cy="14" r="14" fill="black"/>
+                        </svg>
+                    </div>
+                </div>
+
             </header>
             <div class="content-wrapper">
                 <div class="sidebar-container">
                     <!-- Sidebar content -->
-                     <h1>Groups</h1>
-                     <div class="minimize-icon-container">
-                        <ion-icon name="chevron-back-outline"></ion-icon>
-                     </div>
+                    <g class="sidebar-header">
+                        <h1>Groups</h1>
+                        <hr>
+                    </g>
+                
+                    <li class="group-container">
+                        <div class="group-element-container">
+                            <div class="element-icon"></div>
+                            <h1 class="element-title">Group 1</h1>
+                            <ion-icon name="close-outline"></ion-icon>
+                        </div>
+                        <div class="group-element-container">
+                            <div class="element-icon"></div>
+                            <h1 class="element-title">Group 2</h1>
+                            <ion-icon name="close-outline"></ion-icon>
+                        </div>
+                        <div class="group-element-container">
+                            <div class="element-icon"></div>
+                            <h1 class="element-title">Group 3</h1>
+                            <ion-icon name="close-outline"></ion-icon>
+                        </div>
+                        <div class="group-element-container">
+                            <div class="element-icon"></div>
+                            <h1 class="element-title">Group 4</h1>
+                            <ion-icon name="close-outline"></ion-icon>
+                        </div>
+                    </li>
+                    <div class="minimize-icon-container">
+                        <ion-icon name="chevron-back-outline" class="minimize-icon"></ion-icon>
+                    </div>
                 </div>
                 <div class="element-container">
                     <!-- Main SVG content -->
