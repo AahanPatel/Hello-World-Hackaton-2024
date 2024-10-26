@@ -5,7 +5,7 @@ function saveFile(name, choice) {
             svgExport.downloadSvg(svgNode,name, { width: svgNode.width, height: svgNode.height } );
             break;
         case "png": 
-            svgExport.downloadPng("<svg id=\"mysvg\"></svg>", name, {width: svgNode.width, height: svgNode.height});
+            svgExport.downloadPng(svgNode, name, {width: svgNode.width, height: svgNode.height});
             break;
         case "jpeg": 
             svgExport.downloadJpeg(svgNode, name);
