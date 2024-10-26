@@ -233,6 +233,7 @@ body, html {
     justify-content: flex-start;
     align-items: center;
     min-height: 40px;
+    max-height: 40px;
     margin: 3px 5px; 
     padding: 10px;
     flex: 1; 
@@ -252,7 +253,7 @@ body, html {
     flex: none;
     width: 25px;
     height: 25px;
-    border: solid black 3px;
+    border: solid black 2px;
     background-color: red;
     border-radius: 35%;
     transition: transform .5s ease-out;
@@ -276,13 +277,18 @@ body, html {
 .group-element-container ion-icon {
     color: black;
     font-size: 20px;
+    opacity: 0;
     margin-left: auto;
     transition: .25s ease-out;
 }
 
 .group-element-container ion-icon:hover {
     font-size: 25px;
-    transform: rotateZ(-10deg);
+    color: red;
+}
+
+.group-element-container:hover ion-icon {
+    opacity: 1;
 }
 
 .minimize-icon-container {

@@ -1,5 +1,6 @@
 class Nodes {
     static selectionNode = document.getElementById("selectionNode")
+
     nodeArray = []
 
     appendNodes(cardElementClass) {
@@ -12,7 +13,7 @@ class Nodes {
             selectionNodeClone.setAttribute("cx", positionArray[i][0]);
             selectionNodeClone.setAttribute("cy", positionArray[i][1]);        
             selectionNodeClone.style.display = "block"
-            this.nodeArray.push(selectionNodeClone)
+            this.nodeArray.push(selectionNodeClone);
         }
     }
 
