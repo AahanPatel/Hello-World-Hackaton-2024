@@ -12,12 +12,51 @@ function main() {
     console.log(card);
 
     const addButton = document.getElementsByClassName("add-circle-container")[0];
+
     const minimizeSidebarButton = document.getElementsByClassName("minimize-icon-container")[0];
     const groupContainer = document.getElementsByClassName("group-container");
     const sidebarContainer = document.getElementsByClassName("sidebar-container");
     const sidebarHeader = document.getElementsByClassName("sidebar-header");
     const sidebarMinimizeIcon = document.getElementsByClassName("minimize-icon");
     var sidebarMinimized = false;
+
+    const groupButtons = document.getElementsByClassName('group-element-container');
+
+    groupButtons.forEach((element, index) => {
+        element.addEventListener('click', () => {
+            console.log(`Element ${index + 1} clicked`);
+        });
+    });
+
+    createGroup("Group 10");
+
+    function createGroup(groupTitle) {
+        const groupElementContainer = document.createElement('div');
+        groupElementContainer.classList.add('group-element-container');
+
+        const elementIcon = document.createElement('div');
+        elementIcon.classList.add('element-icon');
+
+        const heading = document.createElement('h1');
+        heading.textContent = groupTitle;
+        heading.classList.add('element-title');
+
+        const closeIcon = document.createElement('ion-icon');
+        closeIcon.setAttribute('name', 'close-outline');
+ 
+        groupElementContainer.appendChild(elementIcon);
+        groupElementContainer.appendChild(heading);
+        groupElementContainer.appendChild(closeIcon);
+
+        document.querySelector('.group-container').appendChild(groupElementContainer);
+        const titles = document.querySelectorAll('.group-element-container .element-title');
+
+        groupElementContainer.addEventListener('click', () => {
+            //stuff here
+        });
+
+        toggleTextVisibility();
+    }
 
     addButton.addEventListener("click", () => {
         const card = new IdeaCard();
@@ -49,7 +88,7 @@ window.onload = main;
 
 //for sidebar window resizing 
 const sidebar = document.querySelector('.sidebar-container');
-const titles = document.querySelectorAll('.group-element-container h1');
+const titles = document.querySelectorAll('.group-element-container .element-title');
 
 function toggleTextVisibility() {
     if (sidebar.offsetWidth < 100) {

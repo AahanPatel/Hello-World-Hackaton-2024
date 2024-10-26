@@ -82,9 +82,13 @@ body, html {
     flex-wrap: nowrap;
 }
 
+.sidebar-header {
+    width: 100%;
+}
+
 .sidebar-container h1 {
     color: rgb(33, 33, 33);
-    font-size: 1.7vw;
+    font-size: 15px;
     text-align: center;
 }
 
@@ -144,10 +148,22 @@ body, html {
     margin: 8px 5px;
 }
 
-.group-element-container h1 {
+.group-element-container .element-title {
     margin: 0;
     text-align: left;
     font-size: 1vw;
+}
+
+.group-element-container ion-icon {
+    color: black;
+    font-size: 20px;
+    margin-left: auto;
+    transition: .25s ease-out;
+}
+
+.group-element-container ion-icon:hover {
+    font-size: 25px;
+    transform: rotateZ(-10deg);
 }
 
 .minimize-icon-container {
