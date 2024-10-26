@@ -75,8 +75,6 @@ class IdeaCard {
         }
 
         this.cardElement.addEventListener("mouseenter", OnMouseEnter);
-        this.addResizeEvents();
-        this.addEditEvents();
     }
     
     addMovementEvents() {
@@ -112,6 +110,8 @@ class IdeaCard {
     }
 
     addResizeEvents() {
+        console.log("Hi");
+
         const scope = this;
 
         let sc = 0;
@@ -181,10 +181,13 @@ class IdeaCard {
         const styleWidth = parseInt(compStyle.width.replace("px", ""));
         const styleHeight = parseInt(compStyle.height.replace("px", ""));
 
-        if(styleWidth < styleHeight) {
-            return viewWidth / styleWidth;
+        const r1 = viewWidth / styleWidth;
+        const r2 = viewHeight / styleHeight;
+
+        if(r1 > r2) {
+            return r1;
         } else {
-            return viewHeight / styleHeight;
+            return r2;
         }
     }
 
