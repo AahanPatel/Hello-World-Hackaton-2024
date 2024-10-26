@@ -23,10 +23,34 @@ body, html {
     align-items: center;
     justify-content: center;
     color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.element-container svg {
-    width: 100%
+.idea-card {
+    fill: rgb(249, 252, 252);         
+    stroke: #ababab;          
+    stroke-width: 1.5;          
+    rx: 5px;                 
+    ry: 5px; 
+}
+
+.idea-card-title {
+    font-size: 16px;
+    font-weight: bold;
+    fill: #333;              
+    padding: 10px;
+    dominant-baseline: hanging;
+}
+
+.idea-card-description {
+    font-size: 14px;
+    fill: #555;
+    padding: 4px;
+}
+
+.idea-card-resize {
+    fill: grey;              
+    cursor: nwse-resize;       
 }
 
 .sidebar-container {
