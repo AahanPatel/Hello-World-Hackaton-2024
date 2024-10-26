@@ -6,6 +6,16 @@ const DEFAULT_DOT_DISTANCE = 4;
 
 const ARROW_HEAD_ANGLE_RADIANS = ARROW_HEAD_ANGLE * Math.PI / 180; // DO NOT CHANGE THIS
 
+function intersectAABB(rayOrigin, rayDir, boxMin, boxMax) {
+    const tMin = boxMin.map((v, i) => (v - rayOrigin[i]) / rayDir[i]);
+    const tMax = boxMax.map((v, i) => (v - rayOrigin[i]) / rayDir[i]);
+    const t1 = tMin.map((v, i) => Math.min(v, tMax[i]));
+    const t2 = tMin.map((v, i) => Math.max(v, tMax[i]));
+    const tNear = Math.max(...t1);
+    const tFar = Math.min(...t2);
+    return [tNear, tFar];
+};
+
 class Arrow {
     constructor() {
         this.arrowElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -13,12 +23,56 @@ class Arrow {
         this.arrowElement.setAttribute("fill", "none");
         this.arrowElement.setAttribute("stroke-linecap", "round");
 
+        this.fromCard = null;
+        this.toCard = null;
+
         this._startPoint = [0, 0];
         this._endPoint = [0, 0];
     }
 
     addTo(element) {
         element.appendChild(this.arrowElement);
+    }
+
+    setBetweenCards(from, to) {
+        if(this.fromCard !== null && this.toCard !== null) {
+            this.fromCard.arrows.splice(this.fromCard.arrows.indexOf(this), 1);
+            this.toCard.arrows.splice(this.toCard.arrows.indexOf(this), 1);
+        }
+
+        this.fromCard = from;
+        this.toCard = to;
+
+        this.fromCard.arrows.push(this);
+        this.toCard.arrows.push(this);
+
+        this.updateFromSetCards();
+    }
+
+    updateFromSetCards() {
+        if(this.fromCard.overlapsWith(this.toCard)) {
+            this.arrowElement.style.display = "none";
+            return;
+        } else {
+            this.arrowElement.style.display = "";
+        }
+
+        const x1 = this.fromCard.x, y1 = this.fromCard.y, w1 = this.fromCard.width, h1 = this.fromCard.height;
+        const x2 = this.toCard.x, y2 = this.toCard.y, w2 = this.toCard.width, h2 = this.toCard.height;
+
+        const cx1 = x1 + w1 / 2, cy1 = y1 + h1 / 2;
+        const cx2 = x2 + w2 / 2, cy2 = y2 + h2 / 2;
+
+        const int1 = intersectAABB([cx1, cy1], [cx2 - cx1, cy2 - cy1], [x1, y1], [x1 + w1, y1 + h1])[1] + 0.01;
+        const int2 = intersectAABB([cx1, cy1], [cx2 - cx1, cy2 - cy1], [x2, y2], [x2 + w2, y2 + h2])[0] - 0.01;
+
+        this._startPoint[0] = cx1 + (cx2 - cx1) * int1;
+        this._startPoint[1] = cy1 + (cy2 - cy1) * int1;
+
+        this._endPoint[0] = cx1 + (cx2 - cx1) * int2;
+        this._endPoint[1] = cy1 + (cy2 - cy1) * int2;
+
+        this._recalculateArrow();
     }
 
     get startX() {
