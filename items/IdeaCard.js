@@ -28,6 +28,8 @@ class IdeaCard {
         this.cardElement = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         this.titleElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
 
+        this.arrows = [];
+
         this.titleElement.style.userSelect = "none";
 
         this.descriptionElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -164,7 +166,14 @@ class IdeaCard {
 
     getResizePathString() {
         return `M ${this.x + this.width - RESIZE_ELEMENT_LENGTH + RESIZE_ELEMENT_BORDER_WIDTH / 2},${this.y + this.height - RESIZE_ELEMENT_BORDER_WIDTH / 2} h ${RESIZE_ELEMENT_LENGTH - RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2} a ${RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2},${RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2}, 0 0 0 ${RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2},-${RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2} v -${RESIZE_ELEMENT_LENGTH - RESIZE_ELEMENT_BORDER_RADIUS - RESIZE_ELEMENT_BORDER_WIDTH / 2} Z`;
-        // return `M ${this.x + this.width - RESIZE_ELEMENT_LENGTH},${this.y + this.height} h ${RESIZE_ELEMENT_LENGTH - RESIZE_ELEMENT_BORDER_RADIUS} a ${RESIZE_ELEMENT_BORDER_RADIUS},${RESIZE_ELEMENT_BORDER_RADIUS} 0 0 0 ${RESIZE_ELEMENT_BORDER_RADIUS},-${RESIZE_ELEMENT_BORDER_RADIUS} v ${RESIZE_ELEMENT_LENGTH - RESIZE_ELEMENT_BORDER_RADIUS} Z`;
+    }
+
+    overlapsWith(other) {
+        const isOverlapping1D = (xmin1, xmax1, xmin2, xmax2) => xmax1 >= xmin2 && xmax2 >= xmin1;
+
+        return isOverlapping1D(this.x, this.x + this.width, other.x, other.x + other.width) &&
+               isOverlapping1D(this.y, this.y + this.height, other.y, other.y + other.height);
+            
     }
 
     get title() {
@@ -205,6 +214,10 @@ class IdeaCard {
         this.titleElement.setAttribute("x", this.x + textOffset);
         
         this.resizeElement.setAttribute("d", this.getResizePathString());
+
+        for(const arrow of this.arrows) {
+            arrow.updateFromSetCards();
+        }
     }
 
     get height() {
@@ -216,6 +229,10 @@ class IdeaCard {
         this.cardElement.height.baseVal.value = height;
 
         this.resizeElement.setAttribute("d", this.getResizePathString());
+
+        for(const arrow of this.arrows) {
+            arrow.updateFromSetCards();
+        }
     }
 
     get x() {
@@ -229,6 +246,10 @@ class IdeaCard {
         this.titleElement.setAttribute("x", x + textOffset);
 
         this.resizeElement.setAttribute("d", this.getResizePathString());
+        
+        for(const arrow of this.arrows) {
+            arrow.updateFromSetCards();
+        }
     }
 
     get y() {
@@ -239,6 +260,10 @@ class IdeaCard {
         this.cardElement.y.baseVal.value = y;
         this.titleElement.setAttribute("y", y + CARD_TITLE_PADDING);
         this.resizeElement.setAttribute("d", this.getResizePathString());
+        
+        for(const arrow of this.arrows) {
+            arrow.updateFromSetCards();
+        }
     }
 
     get textLength() {
