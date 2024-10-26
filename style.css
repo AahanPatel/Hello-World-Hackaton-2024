@@ -25,6 +25,10 @@ body, html {
     color: white;
 }
 
+.element-container svg {
+    width: 100%
+}
+
 .sidebar-container {
     display: flex;
     width: 14vw;

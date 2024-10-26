@@ -5,8 +5,37 @@
         <script src="./items/IdeaCard.js"></script>
         <link rel="stylesheet" href="style.css" />
     <head>
+    <script src="script.js"></script>
     <body>
-        <svg viewBox="0 0 200 200" style="width:200px;height:200px;border:1px solid black;" id="whiteboard"></svg>
+        <div class="main-container">
+            <header class="header-container">
+                <div class="logo-container">
+                    
+                </div>
+            </header>
+            <div class="content-wrapper">
+                <div class="sidebar-container">
+                    <!-- Sidebar content -->
+                     <h1>Groups</h1>
+                     <div class="minimize-icon-container">
+                        <ion-icon name="chevron-back-outline"></ion-icon>
+                     </div>
+                </div>
+                <div class="element-container">
+                    <!-- Main SVG content -->
+                    <svg viewBox="0 0 500 500" style="width:1200px;height:800px;border:1px solid black;" id="whiteboard"></svg>
+                </div>
+            </div>
+            <div class="add-circle-container">
+                <ion-icon name="add-circle-outline"></ion-icon>
+            </div>
+            <footer>
+                
+            </footer>
+        </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     </body>
     <script src="script.js"></script>
 </html>
+    
