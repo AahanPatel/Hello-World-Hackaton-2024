@@ -206,6 +206,9 @@ body, html {
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    height: 80vh; 
 }
 
 .group-element-container {
@@ -214,7 +217,7 @@ body, html {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    flex: none;
+    min-height: 40px;
     margin: 3px 5px; 
     padding: 10px;
     flex: 1; 
@@ -223,6 +226,10 @@ body, html {
     overflow: hidden;
     border-radius: 10px;
     transition: margin .5s ease-out;
+}
+
+.sidebar-container::-webkit-scrollbar {
+    display: none; 
 }
 
 .group-element-container .element-icon {

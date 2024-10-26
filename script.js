@@ -67,14 +67,38 @@ function main() {
         });
     });
 
-    createGroup("Group 10");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 11", "rgb(100, 50, 200)");
+    createGroup("Group 11", "rgb(100, 50, 200)");
+    createGroup("Group 11", "rgb(100, 50, 200)");
+    createGroup("Group 11", "rgb(100, 50, 200)");
+    createGroup("Group 11", "rgb(100, 50, 200)");
 
-    function createGroup(groupTitle) {
+    function createGroup(groupTitle, iconColor) {
         const groupElementContainer = document.createElement('div');
         groupElementContainer.classList.add('group-element-container');
 
         const elementIcon = document.createElement('div');
         elementIcon.classList.add('element-icon');
+        elementIcon.style.backgroundColor = iconColor;
 
         const heading = document.createElement('h1');
         heading.textContent = groupTitle;
