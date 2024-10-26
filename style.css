@@ -6,6 +6,7 @@
 
 body, html {
     height: 100%;
+    margin: 0;
     font-family: Arial, sans-serif;
 }
 
@@ -13,6 +14,11 @@ body, html {
     display: flex;
     flex-direction: column;
     height: 100vh;
+}
+
+.content-wrapper {
+    display: flex;
+    flex: 1;
 }
 
 .header-container {
@@ -63,22 +69,63 @@ body, html {
 
 .sidebar-container {
     display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: flex-start;
     width: 14vw;
-    background-color: #333;
-    justify-content: space-between;
+    background-color: rgb(230, 237, 245);
     color: white;
     padding: 1em;
+    border-right: solid rgb(176, 184, 195) .5vw;
+    height: 100%; 
+    position: relative;
+}
+
+.sidebar-container h1 {
+    color: rgb(33, 33, 33);
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.minimize-icon-container {
+    position: absolute; 
+    height: 50px; 
+    width: 12px; 
+    top: 50%;
+    right: -6%; 
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    cursor: pointer; 
+    background-color: rgb(176, 184, 195);
+    border-radius: 15px;
+    max-height: 70px; 
+    max-width: 25px;
+    overflow: hidden; 
+    transition: .4s ease-out;
+}
+
+.minimize-icon-container:hover {
+    height: 70px;
+}
+
+.minimize-icon-container ion-icon {
+    font-size: 60px;
+    color: black;
+    opacity: 0.3;
+    transition: 0.4s ease-out;
+}
+
+.minimize-icon-container:hover ion-icon {
+    font-size: 80px;
+    opacity: 1;
 }
 
 .element-container {
     flex: 1;
     padding: 1em;
     background-color: #f4f4f4;
-}
-
-.content-wrapper {
-    display: flex;
-    flex: 1;
 }
 
 footer {
@@ -112,20 +159,4 @@ footer {
     color: black; 
 }
 
-.sidebar-container h1 {
-    color: white;
-    font-size: 1.5em;
-    text-align: center;
-}
-
-.minimize-icon-container ion-icon {
-    font-size: 20px;
-    color: white;
-    cursor: pointer;
-    transition: .5s ease-out;
-}
-
-.minimize-icon-container ion-icon:hover {
-    transform: scale(120%);
-}
 
