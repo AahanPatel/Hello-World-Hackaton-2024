@@ -72,7 +72,6 @@ body, html {
     flex-direction: column;
     justify-content: flex-start; 
     align-items: flex-start;
-    width: 14vw;
     min-width: 80px;
     background-color: rgb(230, 237, 245);
     color: white;
@@ -121,6 +120,8 @@ body, html {
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
+    border-radius: 10px;
+    transition: margin .5s ease-out;
 }
 
 .group-element-container .element-icon {
@@ -131,6 +132,16 @@ body, html {
     border: solid black 3px;
     background-color: red;
     border-radius: 35%;
+    transition: transform .5s ease-out;
+}
+
+.group-element-container:hover .element-icon {
+    transform: rotateZ(45deg) scale(105%);
+}
+
+.group-element-container:hover {
+    background-color: rgb(255, 255, 255);
+    margin: 8px 5px;
 }
 
 .group-element-container h1 {
@@ -141,10 +152,10 @@ body, html {
 
 .minimize-icon-container {
     position: absolute; 
-    height: 50px; 
+    height: 60px; 
     width: 12px; 
     top: 50%;
-    right: -10px; 
+    right: -12px; 
     transform: translateY(-50%);
     display: flex;
     justify-content: center; 
@@ -152,18 +163,18 @@ body, html {
     cursor: pointer; 
     background-color: rgb(176, 184, 195);
     border-radius: 15px;
-    max-height: 70px; 
+    max-height: 90px; 
     max-width: 25px;
     overflow: hidden; 
     transition: .2s ease-out;
 }
 
 .minimize-icon-container:hover {
-    height: 70px;
+    height: 90px;
 }
 
 .minimize-icon-container ion-icon {
-    font-size: 60px;
+    font-size: 100px;
     color: black;
     opacity: 0.3;
     transition: 0.4s ease-out;
@@ -172,6 +183,10 @@ body, html {
 .minimize-icon-container:hover ion-icon {
     font-size: 80px;
     opacity: 1;
+}
+
+ion-icon {
+    transform: rotateZ(0deg);
 }
 
 .element-container {
