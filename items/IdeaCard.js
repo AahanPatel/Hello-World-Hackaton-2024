@@ -12,6 +12,7 @@ class IdeaCard {
         this.descriptionElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
         this.resizeElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
+        this.groupElement.setAttribute("class", "group-element");
         this.cardElement.setAttribute("class", "idea-card");
         this.titleElement.setAttribute("class", "idea-card-title");
         this.descriptionElement.setAttribute("class", "idea-card-description");

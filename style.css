@@ -30,8 +30,16 @@ body, html {
     fill: rgb(249, 252, 252);         
     stroke: #ababab;          
     stroke-width: 1.5;          
-    rx: 5px;                 
-    ry: 5px; 
+    rx: 5px;            
+    transition: 0.25s ease-in;     
+}
+
+.idea-card:hover {
+    fill: rgb(233, 243, 243);  
+}
+
+.group-element {
+    transition: 0.5s ease-in;
 }
 
 .idea-card-title {
