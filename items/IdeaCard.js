@@ -42,6 +42,7 @@ class IdeaCard {
         this.resizeElement.setAttribute("class", "idea-card-resize");
 
         this.groupElement.append(this.cardElement, this.titleElement, this.descriptionElement, this.resizeElement);
+        this.nodes = new Nodes()
 
         this.addEvents();
     }
@@ -93,6 +94,7 @@ class IdeaCard {
         }
 
         function OnMouseMove(ev) {
+            scope.nodes.dissolveNodes()
             scope.x += ev.movementX * sc;
             scope.y += ev.movementY * sc;
         }
@@ -102,6 +104,7 @@ class IdeaCard {
                 scope.containerElement.removeEventListener("mousemove", OnMouseMove);
                 scope.containerElement.removeEventListener("mouseup", OnMouseUp);
                 scope.cardElement.addEventListener("mousedown", OnMouseDown);
+                scope.nodes.appendNodes(scope)
             }
         }
 
