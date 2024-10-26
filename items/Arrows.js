@@ -73,3 +73,26 @@ class Arrow {
         throw "_recalculateArrow not implemented for base arrow class";
     }
 }
+
+class SolidArrow extends Arrow {
+    _recalculateArrow() {
+        const [startX, startY] = this._startPoint;
+        const [endX, endY] = this._endPoint;
+
+        const dx = endX - startX;
+        const dy = endY - startY;
+
+        const ang = Math.atan2(dy, dx);
+
+        const low = ang - ARROW_HEAD_ANGLE_RADIANS;
+        const high = ang + ARROW_HEAD_ANGLE_RADIANS;
+
+        const pt1x = endX - Math.cos(low) * ARROW_HEAD_LENGTH;
+        const pt1y = endY - Math.sin(low) * ARROW_HEAD_LENGTH;
+
+        const pt2x = endX - Math.cos(high) * ARROW_HEAD_LENGTH;
+        const pt2y = endY - Math.sin(high) * ARROW_HEAD_LENGTH;
+
+        this.arrowElement.setAttribute("d", `M ${startX}, ${startY} L ${endX}, ${endY} M ${endX}, ${endY} L ${pt1x}, ${pt1y} M ${endX}, ${endY} L ${pt2x}, ${pt2y}`);
+    }
+}
