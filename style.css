@@ -41,7 +41,7 @@ body, html {
     display: flex;
     justify-content: center;
     color: #363636;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    outline: 1vh black;
 }
 
 .header-right { /*Header right side*/

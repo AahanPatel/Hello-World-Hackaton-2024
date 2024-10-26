@@ -1,3 +1,5 @@
+let menuActive = false;
+
 function main() {
     const whiteboard = document.getElementById("whiteboard");
 
@@ -15,7 +17,6 @@ function main() {
     //Header
     const menuItems = Array.from(document.getElementsByClassName("menu"));
     const submenuGroups = Array.from(document.getElementsByClassName("submenu"));
-    let menuActive = false;
 
     resetMenus(menuItems, submenuGroups);
     for (let i = 0; i < menuItems.length; i++) {
@@ -36,6 +37,7 @@ function main() {
                 menuItems[i].style.backgroundColor = "#cfdcef";
                 submenuGroups[i].style.display = "block";
                 menuItems[i].classList.remove("push");
+                menuActive = true;
             }
         })
     }
@@ -155,6 +157,7 @@ function resetMenus(menuItems, submenuGroups) {
     submenuGroups.forEach(ele => {
         ele.style.display = "none";
     })
+    menuActive = false;
 }
 
 window.onload = main;
