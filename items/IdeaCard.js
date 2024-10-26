@@ -18,15 +18,6 @@ class IdeaCard {
         this.descriptionElement.setAttribute("class", "idea-card-description");
         this.resizeElement.setAttribute("class", "idea-card-resize");
 
-        // this.cardElement.setAttribute("fill", "white");
-        // this.cardElement.setAttribute("stroke", "black");
-
-        // this.titleElement.setAttribute("fill", "black");
-        // this.titleElement.setAttribute("dominant-baseline", "hanging");
-
-        // this.resizeElement.setAttribute("fill", "grey");
-        // this.resizeElement.setAttribute("stroke", "none");
-
         this.groupElement.append(this.cardElement, this.titleElement, this.descriptionElement, this.resizeElement);
     }
 
