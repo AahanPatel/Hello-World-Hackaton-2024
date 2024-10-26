@@ -34,7 +34,40 @@ class IdeaCard {
     }
 
     addMovementEvents() {
+        const scope = this;
+        let startX = 0, startY = 0;
 
+        function OnMouseDown(ev) {
+            startX = ev.clientX;
+            startY = ev.clientY;
+        
+            if(scope.containerElement) {
+                scope.containerElement.removeEventListener("mousedown", OnMouseDown);
+                scope.containerElement.addEventListener("mousemove", OnMouseMove);
+                scope.containerElement.addEventListener("mouseup", OnMouseUp);
+            }
+        }
+
+        function OnMouseMove(ev) {
+            const dx = ev.clientX - startX;
+            const dy = ev.clientY - startY;
+            
+            scope.x += dx;
+            scope.y += dy;
+    
+            startX = ev.clientX;
+            startY = ev.clientY;
+        }
+
+        function OnMouseUp() {
+            if(scope.containerElement) {
+                scope.containerElement.removeEventListener("mousemove", OnMouseMove);
+                scope.containerElement.removeEventListener("mouseup", OnMouseUp);
+                scope.containerElement.addEventListener("mousedown", OnMouseDown);
+            }
+        }
+
+        this.cardElement.addEventListener("mousedown", OnMouseDown);
     }
 
     addResizeEvents() {
