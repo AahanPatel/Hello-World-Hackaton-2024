@@ -135,3 +135,58 @@ class DashedArrow extends Arrow {
         this.arrowElement.setAttribute("d", `${pathStr} M ${endX}, ${endY} L ${pt1x}, ${pt1y} M ${endX}, ${endY} L ${pt2x}, ${pt2y}`);
     }
 }
+
+class DottedArrow extends Arrow {
+    constructor(from, to, dotDistance = 10) {
+        super(from, to);
+
+        this.arrowElement = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        this.lineElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        this.headElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+        this.lineElement.setAttribute("stroke-width", "2");
+
+        this.arrowElement.append(this.lineElement, this.headElement);
+
+        this.arrowElement.setAttribute("stroke", "black");
+        this.arrowElement.setAttribute("fill", "none");
+        this.arrowElement.setAttribute("stroke-linecap", "round");
+
+        this.dotDistance = dotDistance;
+    }
+
+    _recalculateArrow() {
+        const [startX, startY] = this._startPoint;
+        const [endX, endY] = this._endPoint;
+
+        let dx = endX - startX;
+        let dy = endY - startY;
+
+        let ang = Math.atan2(dy, dx);
+        let mag = Math.hypot(dx, dy);
+
+        let dirX = Math.cos(ang);
+        let dirY = Math.sin(ang);
+
+        const low = ang - Math.PI / 6;
+        const high = ang + Math.PI / 6;
+
+        const pt1x = endX - Math.cos(low) * 15;
+        const pt1y = endY - Math.sin(low) * 15;
+
+        const pt2x = endX - Math.cos(high) * 15;
+        const pt2y = endY - Math.sin(high) * 15;
+
+
+        let pathStr = `M ${startX}, ${startY}`;
+
+        let numSteps = Math.floor(mag / (this.dotDistance));
+
+        for(let i = 0; i < numSteps; i++) {
+            pathStr += `h 0 m ${dirX * this.dotDistance}, ${dirY * this.dotDistance}`;
+        }
+
+        this.lineElement.setAttribute("d", pathStr);
+        this.headElement.setAttribute("d", `M ${endX}, ${endY} L ${pt1x}, ${pt1y} M ${endX}, ${endY} L ${pt2x}, ${pt2y}`);
+    }
+}
