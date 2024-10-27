@@ -63,14 +63,25 @@ class Arrow {
         const cx1 = x1 + w1 / 2, cy1 = y1 + h1 / 2;
         const cx2 = x2 + w2 / 2, cy2 = y2 + h2 / 2;
 
-        const int1 = intersectAABB([cx1, cy1], [cx2 - cx1, cy2 - cy1], [x1, y1], [x1 + w1, y1 + h1])[1] + 0.01;
-        const int2 = intersectAABB([cx1, cy1], [cx2 - cx1, cy2 - cy1], [x2, y2], [x2 + w2, y2 + h2])[0] - 0.01;
+        const m = Math.hypot(cx2 - cx1, cy2 - cy1);
 
-        this._startPoint[0] = cx1 + (cx2 - cx1) * int1;
-        this._startPoint[1] = cy1 + (cy2 - cy1) * int1;
+        const dirX = (cx2 - cx1) / m;
+        const dirY = (cy2 - cy1) / m;
 
-        this._endPoint[0] = cx1 + (cx2 - cx1) * int2;
-        this._endPoint[1] = cy1 + (cy2 - cy1) * int2;
+        const int1 = intersectAABB([cx1, cy1], [dirX, dirY], [x1, y1], [x1 + w1, y1 + h1])[1] + 10;
+        const int2 = intersectAABB([cx1, cy1], [dirX, dirY], [x2, y2], [x2 + w2, y2 + h2])[0] - 10;
+
+        if(int2 > int1) {
+            this._startPoint[0] = cx1 + dirX * int1;
+            this._startPoint[1] = cy1 + dirY * int1;
+
+            this._endPoint[0] = cx1 + dirX * int2;
+            this._endPoint[1] = cy1 + dirY * int2;
+
+            this.arrowElement.style.display = "";
+        } else {
+            this.arrowElement.style.display = "none";
+        }
 
         this._recalculateArrow();
     }
