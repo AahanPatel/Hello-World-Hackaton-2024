@@ -10,9 +10,9 @@ class Nodes {
             cardElementClass.groupElement.append(selectionNodeClone)
             selectionNodeClone.setAttribute("id", "selectionNode" + i);
             selectionNodeClone.setAttribute("cx", positionArray[i][0]);
-            selectionNodeClone.setAttribute("cy", positionArray[i][1]);        
+            selectionNodeClone.setAttribute("cy", positionArray[i][1]);     
+            selectionNodeClone.addEventListener("mousedown", onArrowStart);   
             selectionNodeClone.style.display = "block"
-            selectionNodeClone.addEventListener("mousedown", onArrowStart);
             
             this.nodeArray.push(selectionNodeClone)
         }

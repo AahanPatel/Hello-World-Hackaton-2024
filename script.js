@@ -12,6 +12,35 @@ function main() {
 
     cards.push(card);
 
+    function createCard(width, height, x, y, title) {
+        const card = new IdeaCard();
+        card.addTo(whiteboard);
+        card.width = width
+        card.height = height;
+        card.x = x
+        card.y = y
+        card.title = title;
+        cards.push(card);
+    }
+
+    registerShortcuts()
+    function registerShortcuts() {
+        document.addEventListener('keydown', (event) => {
+            const shortcut = `${event.ctrlKey ? 'Control+' : ''}${event.key}`;
+
+            // shortcut array
+            const actions = {
+                'Control+s': () => createCard(100, 100, 50, 50, "New Idea"),
+                'Control+p': () => saveFile("download", "svg"),
+            };
+
+            if (actions[shortcut]) {
+                event.preventDefault();
+                actions[shortcut]();
+            }
+        });        
+    }
+
     //Header
     const menuItems = Array.from(document.getElementsByClassName("menu"));
     const submenuGroups = Array.from(document.getElementsByClassName("submenu"));
