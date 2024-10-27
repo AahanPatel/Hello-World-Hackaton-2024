@@ -71,18 +71,17 @@ function main() {
             }
         })
     }
-
-    const submenuActions = {
-        "New": () => createCard(100, 100, 50, 50, "New Idea"),
-        "Copy": () => alert("Copy functionality to be implemented."),
-        "Save": () => saveFile("download", "svg"),
-        "Print": () => window.print(),
-        "Rename": () => alert("Rename functionality to be implemented."),
-        "Delete": () => alert("Rename functionality to be implemented.")
-    }
-
     registerSubmenuGroups()
     function registerSubmenuGroups() {
+        const submenuActions = {
+            "New": () => createCard(100, 100, 50, 50, "New Idea"),
+            "Copy": () => alert("Copy functionality to be implemented."),
+            "Save": () => saveFile("download", "svg"),
+            "Print": () => window.print(),
+            "Rename": () => alert("Rename functionality to be implemented."),
+            "Delete": () => alert("Rename functionality to be implemented.")
+        }
+        
         const submenuOptionList = document.getElementsByClassName("submenu-option")
         submenuOptionList.forEach(element => {
             element.addEventListener("click", function(ev){
