@@ -12,7 +12,23 @@ class Nodes {
             selectionNodeClone.setAttribute("cx", positionArray[i][0]);
             selectionNodeClone.setAttribute("cy", positionArray[i][1]);        
             selectionNodeClone.style.display = "block"
+            selectionNodeClone.addEventListener("mousedown", onArrowStart);
+            
             this.nodeArray.push(selectionNodeClone)
+        }
+
+        function onArrowStart(ev) {
+            selectionNodeClone.removeEventListener("mousedown", onArrowStart);
+            selectionNodeClone.addEventListener("mouseup", onArrowEnd);
+            console.log("Draw arrow start")
+            // Implement arrow drawing functionality here. 
+        }
+
+        function onArrowEnd(ev) {
+            selectionNodeClone.removeEventListener("mouseup", onArrowEnd);
+            selectionNodeClone.addEventListener("mousedown", onArrowStart);
+            console.log("Draw arrow end")
+            // Implement arrow drawing functionality here. 
         }
     }
 
