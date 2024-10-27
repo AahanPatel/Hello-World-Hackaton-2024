@@ -81,28 +81,28 @@ function main() {
 
     createGroup("Group 10", "rgb(100, 200, 20)");
     createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 10", "rgb(100, 200, 20)");
-    // createGroup("Group 11", "rgb(100, 50, 200)");
-    // createGroup("Group 11", "rgb(100, 50, 200)");
-    // createGroup("Group 11", "rgb(100, 50, 200)");
-    // createGroup("Group 11", "rgb(100, 50, 200)");
-    // createGroup("Group 11", "rgb(100, 50, 200)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 10", "rgb(100, 200, 20)");
+    createGroup("Group 11", "rgb(100, 50, 200)");
+    createGroup("Group 11", "rgb(100, 50, 200)");
+    createGroup("Group 11", "rgb(100, 50, 200)");
+    createGroup("Group 11", "rgb(100, 50, 200)");
+    createGroup("Group 11", "rgb(100, 50, 200)");
 
     function createGroup(groupTitle, iconColor) {
         const groupElementContainer = document.createElement('div');
@@ -158,7 +158,7 @@ function main() {
         if (sidebarMinimized) {
             sidebarContainer[0].style.minWidth = "80px";
             groupContainer[0].style.display = "flex";
-            sidebarHeader[0].style.display = "block";
+            sidebarHeader[0].style.display = "flex";
             sidebarMinimizeIcon[0].style.transform = 'rotateZ(0deg)';
         } else {
             sidebarContainer[0].style.minWidth = "1px";
