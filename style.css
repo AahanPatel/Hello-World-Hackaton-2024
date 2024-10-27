@@ -41,7 +41,8 @@ body, html {
     display: flex;
     justify-content: center;
     color: #363636;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    outline: 1vh black;
+    transition: 0.25s ease;
 }
 
 .header-right { /*Header right side*/
@@ -102,6 +103,20 @@ body, html {
 
 .submenu-option {
     display: flex;
+    cursor: pointer;
+}
+
+.submenu-option:first-child {
+    border-radius: 0vh 1vh 0vh 0vh;
+}
+
+.submenu-option:last-child {
+    border-radius: 0vh 0vh 1vh 1vh;
+
+}
+
+.submenu-option:hover {
+    background-color: rgb(228, 228, 228);
 }
 
 .submenu-option i {
@@ -186,6 +201,49 @@ body, html {
 
 .sidebar-header {
     width: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+.arrow-filter-container, .color-filter-container {
+    margin: 0 0 0 5px;
+    padding: 1px;
+    background-color: rgb(255, 255, 255, 0);
+    border-radius: 10px;
+    transition: 0.3s ease-out;    
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.arrow-filter-container ion-icon {
+    font-size: 18px;
+    color: black;
+    transform: rotateZ(-45deg);
+}
+
+.color-filter-icon {
+    width: 10px;
+    height: 10px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 2px;
+    translate: scale(140%);
+    margin: 3px;
+}
+
+.color-filter-border {
+    display: flex;
+    width: 18px;
+    height: 18px;
+    border: solid black 1px;
+    border-radius: 3px;
+    transform: scale(70%);
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow-filter-container:hover, .color-filter-container:hover {
+    background-color: rgb(255, 255, 255);
 }
 
 .sidebar-container h1 {
@@ -199,6 +257,7 @@ body, html {
     height: 4px;
     background-color: rgb(176, 184, 195);
     border-radius: 10%;
+    margin: 5px 0 0 0;
 }
 
 .group-container {
@@ -211,6 +270,9 @@ body, html {
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    height: 80vh; 
 }
 
 .group-element-container {
@@ -219,7 +281,8 @@ body, html {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    flex: none;
+    min-height: 40px;
+    max-height: 40px;
     margin: 3px 5px; 
     padding: 10px;
     flex: 1; 
@@ -230,12 +293,16 @@ body, html {
     transition: margin .5s ease-out;
 }
 
+.sidebar-container::-webkit-scrollbar {
+    display: none; 
+}
+
 .group-element-container .element-icon {
     margin-right: 10px;
     flex: none;
     width: 25px;
     height: 25px;
-    border: solid black 3px;
+    border: solid black 2px;
     background-color: red;
     border-radius: 35%;
     transition: transform .5s ease-out;
@@ -259,13 +326,18 @@ body, html {
 .group-element-container ion-icon {
     color: black;
     font-size: 20px;
+    opacity: 0;
     margin-left: auto;
     transition: .25s ease-out;
 }
 
 .group-element-container ion-icon:hover {
-    font-size: 25px;
-    transform: rotateZ(-10deg);
+    transform: scale(125%);
+    color: red;
+}
+
+.group-element-container:hover ion-icon {
+    opacity: 1;
 }
 
 .minimize-icon-container {
@@ -313,6 +385,127 @@ ion-icon {
     background-color: #f4f4f4;
 }
 
+/* end sidebar styling */
+
+/* start stylebar styling */
+
+.stylebar-container {
+    position: absolute;
+    height: 45px;
+    margin: 15px 10px;
+    right: 3vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.stylebar-container div {
+    margin: .5vw;
+    width: 45px;
+    height: 45px;
+    flex: none;
+    position: relative;
+}
+
+.stylebar-container div ion-icon {
+    color: black;
+    font-size: 1.6vw;
+    padding: 5px;
+    margin: auto;
+    border-radius: 50%;
+    border: solid rgb(58, 58, 58) 2.5px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease-out;
+}
+
+.stylebar-container .color-picker ion-icon {
+    background: linear-gradient(red 40%, white);
+}
+
+.stylebar-container .text-editor ion-icon {
+    background: linear-gradient(rgb(167, 167, 167) 40%, white);
+}
+
+.stylebar-container div:hover ion-icon {
+    transform: scale(110%);
+    transform: rotateZ(-15deg);
+    background: white;
+}
+
+.stylebar-container div:first-child {
+    margin-left: 0; 
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute; 
+    top: 50px; 
+    top: 0;
+    left: 0;
+    background: white; 
+    padding: 10px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    z-index: 100; 
+    list-style-type: none;
+}
+
+.color-picker:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(5, 1fr); 
+    gap: 5px; 
+}
+
+.text-editor:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: grid; 
+    gap: 5px; 
+}
+
+.dropdown-item {
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%; 
+    border: solid rgb(71, 71, 71) 2.5px;
+    cursor: pointer; 
+    transition: transform 0.3s; 
+}
+
+.text-dropdown-item {
+    width: 30px; 
+    height: 30px;
+    margin: 0 auto;
+    border-radius: 25px;
+}
+
+.text-size-field {
+    width: 30px; 
+    height: 30px;
+    cursor: pointer; 
+    transition: transform 0.3s; 
+    padding: 0 0 0 4px;
+}
+
+.dropdown-item:hover {
+    transform: scale(1.1); 
+}
+
+@media (max-width: 1000px) {
+    .stylebar-container div {
+        max-width: 20px; 
+        max-height: 20px; 
+    }
+
+    .dropdown-item, .text-size-field, .text-dropdown-item {
+        width: 15px;
+        height: 15px;
+    }
+
+}
+
 footer {
     background-color: #ccc;
     text-align: center;
@@ -321,27 +514,32 @@ footer {
 
 .add-circle-container {
     position: fixed;
-    bottom: 40px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;  
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    transition: .25s ease-in;
-}
-
-.add-circle-container ion-icon {
-    font-size: 50px;  
-    color: black; 
+    transition: .15s;
+    font-size: 5vh;
+    color: white;
+    background-color: #80A1D1;
+    user-select: none;
 }
 
 .add-circle-container:hover {
     transform: scale(115%);
-    color: black; 
+    background-color: #6f8ab4;
 }
+
+.add-circle-container:active {
+    transform: scale(100%);
+    background-color: #546888;
+}
+
 
 
