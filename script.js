@@ -5,15 +5,6 @@ function main() {
 
     const cards = [];
 
-    const card = new IdeaCard();
-    card.addTo(whiteboard);
-
-    card.width = card.height = 100;
-    card.x = card.y = 50;
-    card.title = "Hi";
-
-    cards.push(card);
-
     function createCard(width, height, x, y, title) {
         const card = new IdeaCard();
         card.addTo(whiteboard);
@@ -94,6 +85,14 @@ function main() {
         resetMenus(menuItems, submenuGroups);
     });
 
+    function getMousePositionSVG(ev) {
+        var point = whiteboard.createSVGPoint();
+        point.x = ev.clientX;
+        point.y = ev.clientY;
+        point = point.matrixTransform(whiteboard.getScreenCTM().inverse());
+        return point;
+    }
+
     // Submenu options
     const header = document.querySelector(".header-container");
     document.getElementById("fullscreen").addEventListener("click", function(){
@@ -117,24 +116,9 @@ function main() {
     //for sidebar window resizing
 
     addButton.addEventListener("click", () => {
-        const card = new IdeaCard();
-        card.addTo(whiteboard);
-
-        card.width = 150;
-        card.height = 40;
-        card.x = card.y = 10;
-        card.title = "New Idea!";
-
-        cards.push(card);
+        createCard(100, 100, 50, 50, "New Idea!");
     });
 
-    addButton.click();
-
-    const arrow = new SolidArrow();
-    arrow.setBetweenCards(cards[0], cards[1]);
-
-    arrow.addTo(whiteboard);
-    
     minimizeSidebarButton.addEventListener("click", () => {
         if (sidebarMinimized) {
             sidebarContainer[0].style.minWidth = "80px";
