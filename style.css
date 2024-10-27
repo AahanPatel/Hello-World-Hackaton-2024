@@ -147,7 +147,7 @@ body, html {
 
 .idea-card {
     fill: rgb(249, 252, 252);         
-    stroke: #ababab;          
+    stroke: #898b8b;          
     stroke-width: 1.5;          
     rx: 5px;            
     transition: fill 0.2s ease-out;
@@ -178,6 +178,7 @@ body, html {
     font-size: 14px;
     fill: #555;
     padding: 4px;
+    dominant-baseline: hanging;
 }
 
 .idea-card-resize {

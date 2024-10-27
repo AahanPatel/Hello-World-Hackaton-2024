@@ -11,6 +11,10 @@ const RESIZE_ELEMENT_BORDER_WIDTH = 1.5; // Pull from CSS
  * @type {HTMLInputElement}
  */
 let TITLE_INPUT;
+/**
+ * @type {HTMLTextAreaElement}
+ */
+let DESCRIPTION_INPUT;
 let editingCard = null;
 const selectedCards = [];
 
@@ -20,6 +24,13 @@ class IdeaCard {
         TITLE_INPUT.addEventListener("input", () => { 
             if(editingCard) {
                 editingCard.title = TITLE_INPUT.value;
+            }
+        });
+
+        DESCRIPTION_INPUT = document.getElementById("description-input");
+        DESCRIPTION_INPUT.addEventListener("input", () => {
+            if(editingCard) {
+                editingCard.description = DESCRIPTION_INPUT.value;
             }
         });
 
@@ -56,7 +67,8 @@ class IdeaCard {
 
         this.titleElement.style.userSelect = "none";
 
-        this.descriptionElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        this.descriptionElement = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        this._desc = "";
         this.resizeElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
         this.groupElement.setAttribute("class", "group-element");
@@ -177,7 +189,15 @@ class IdeaCard {
     addEditEvents() {
         const scope = this;
 
-        function OnDoubleClick() {
+        function getMousePositionSVG(ev) {
+            var point = whiteboard.createSVGPoint();
+            point.x = ev.clientX;
+            point.y = ev.clientY;
+            point = point.matrixTransform(whiteboard.getScreenCTM().inverse());
+            return point;
+        }
+
+        function OnDoubleClick(ev) {
             if(!scope.containerElement) {
                 scope.deselect();
                 return;
@@ -186,8 +206,16 @@ class IdeaCard {
             editingCard = scope;
 
             scope.toggleSelection();
-            TITLE_INPUT.value = scope.title;
-            TITLE_INPUT.focus();
+
+            const pt = getMousePositionSVG(ev);
+
+            if(pt.y < scope.y + 20) {
+                TITLE_INPUT.value = scope.title;
+                TITLE_INPUT.focus();
+            } else {
+                DESCRIPTION_INPUT.value = scope.description;
+                DESCRIPTION_INPUT.focus();
+            }
         }
 
         function OnClick() {
@@ -214,6 +242,7 @@ class IdeaCard {
         if(!this.selected) {
             selectedCards.push(this);
             this.cardElement.style.stroke = "#000000";
+            this.cardElement.style.strokeWidth = "2.5px";
             this.selected = true;
         }
     }
@@ -262,6 +291,38 @@ class IdeaCard {
             
     }
 
+    updateDescriptionElement() {
+        while(this.descriptionElement.children.length > 0) {
+            this.descriptionElement.children[0].remove();
+        }
+
+        const words = this._desc.split(" ");
+        let line = "", elem = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        this.descriptionElement.appendChild(elem);
+        elem.setAttribute("y", this.y + 20);
+        elem.setAttribute("x", this.x + CARD_TITLE_PADDING);
+
+        let lines = 1;
+        for(let i = 0; i < words.length && 20 + lines * 16 < this.height; i++) {
+            line += words[i] + " ";
+
+            elem.textContent = line;
+
+            if(elem.getComputedTextLength() > this.width - 2 * CARD_TITLE_PADDING) {
+                line = line.substring(0, line.length - words[i].length - 1);
+                elem.textContent = line;
+                
+                line = "";
+                elem = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                this.descriptionElement.appendChild(elem);
+                elem.setAttribute("y", this.y + 20 + lines * 16);
+                elem.setAttribute("x", this.x + CARD_TITLE_PADDING);
+                lines++;
+                i--;
+            }
+        }
+    }
+
     get title() {
         return this.titleElement.textContent || "";
     }
@@ -283,7 +344,8 @@ class IdeaCard {
     }
 
     set description(description) {
-        this.descriptionElement.textContent = description;
+        this._desc = description;
+        this.updateDescriptionElement();
     }
 
     get width() {
@@ -299,6 +361,8 @@ class IdeaCard {
         const textOffset = (this.width - len) / 2;
         this.titleElement.setAttribute("x", this.x + textOffset);
         
+        this.updateDescriptionElement();
+
         this.resizeElement.setAttribute("d", this.getResizePathString());
 
         for(const arrow of this.arrows) {
@@ -313,6 +377,8 @@ class IdeaCard {
     set height(height) {
         height = Math.max(height, MIN_CARD_HEIGHT);
         this.cardElement.height.baseVal.value = height;
+
+        this.updateDescriptionElement();
 
         this.resizeElement.setAttribute("d", this.getResizePathString());
 
@@ -331,6 +397,8 @@ class IdeaCard {
         const textOffset = (this.width - len) / 2;
         this.titleElement.setAttribute("x", x + textOffset);
 
+        this.updateDescriptionElement();
+
         this.resizeElement.setAttribute("d", this.getResizePathString());
         
         for(const arrow of this.arrows) {
@@ -346,6 +414,8 @@ class IdeaCard {
         this.cardElement.y.baseVal.value = y;
         this.titleElement.setAttribute("y", y + CARD_TITLE_PADDING);
         this.resizeElement.setAttribute("d", this.getResizePathString());
+
+        this.updateDescriptionElement();
         
         for(const arrow of this.arrows) {
             arrow.updateFromSetCards();
