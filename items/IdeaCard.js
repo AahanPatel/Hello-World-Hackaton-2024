@@ -96,7 +96,7 @@ class IdeaCard {
         }
 
         function OnMouseExit() {
-            scope.nodes.dissolveNodes()
+            setTimeout(() => { scope.nodes.dissolveNodes() }, 300);
             scope.hover = false
             scope.cardElement.removeEventListener("mouseleave", OnMouseExit);
             scope.cardElement.addEventListener("mouseenter", OnMouseEnter);
