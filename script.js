@@ -1,3 +1,5 @@
+let menuActive = false;
+
 function main() {
     const whiteboard = document.getElementById("whiteboard");
 
@@ -44,7 +46,6 @@ function main() {
     //Header
     const menuItems = Array.from(document.getElementsByClassName("menu"));
     const submenuGroups = Array.from(document.getElementsByClassName("submenu"));
-    let menuActive = false;
 
     resetMenus(menuItems, submenuGroups);
     for (let i = 0; i < menuItems.length; i++) {
@@ -65,6 +66,7 @@ function main() {
                 menuItems[i].style.backgroundColor = "#cfdcef";
                 submenuGroups[i].style.display = "block";
                 menuItems[i].classList.remove("push");
+                menuActive = true;
             }
         })
     }
@@ -72,6 +74,16 @@ function main() {
     document.addEventListener("click", function () {
         resetMenus(menuItems, submenuGroups);
     });
+
+    // Submenu options
+    const header = document.querySelector(".header-container");
+    document.getElementById("fullscreen").addEventListener("click", function(){
+        header.style.marginTop = "-5vh";
+    });
+
+    // document.querySelector(".return-header").addEventListener("click", function(){
+    //     header.style.marginTop = "";
+    // });
 
     
     const addButton = document.getElementsByClassName("add-circle-container")[0];
@@ -83,48 +95,7 @@ function main() {
     const sidebarMinimizeIcon = document.getElementsByClassName("minimize-icon");
     var sidebarMinimized = false;
 
-    //for sidebar window resizing 
-    const sidebar = document.querySelector('.sidebar-container');
-    const titles = document.querySelectorAll('.group-element-container .element-title');
-
-
-    const groupButtons = document.getElementsByClassName('group-element-container');
-
-    groupButtons.forEach((element, index) => {
-        element.addEventListener('click', () => {
-            console.log(`Element ${index + 1} clicked`);
-        });
-    });
-
-    createGroup("Group 10");
-
-    function createGroup(groupTitle) {
-        const groupElementContainer = document.createElement('div');
-        groupElementContainer.classList.add('group-element-container');
-
-        const elementIcon = document.createElement('div');
-        elementIcon.classList.add('element-icon');
-
-        const heading = document.createElement('h1');
-        heading.textContent = groupTitle;
-        heading.classList.add('element-title');
-
-        const closeIcon = document.createElement('ion-icon');
-        closeIcon.setAttribute('name', 'close-outline');
-
-        groupElementContainer.appendChild(elementIcon);
-        groupElementContainer.appendChild(heading);
-        groupElementContainer.appendChild(closeIcon);
-
-        document.querySelector('.group-container').appendChild(groupElementContainer);
-        const titles = document.querySelectorAll('.group-element-container .element-title');
-
-        groupElementContainer.addEventListener('click', () => {
-            //stuff here
-        });
-
-        toggleTextVisibility();
-    }
+    //for sidebar window resizing
 
     addButton.addEventListener("click", () => {
         const card = new IdeaCard();
@@ -149,7 +120,7 @@ function main() {
         if (sidebarMinimized) {
             sidebarContainer[0].style.minWidth = "80px";
             groupContainer[0].style.display = "flex";
-            sidebarHeader[0].style.display = "block";
+            sidebarHeader[0].style.display = "flex";
             sidebarMinimizeIcon[0].style.transform = 'rotateZ(0deg)';
         } else {
             sidebarContainer[0].style.minWidth = "1px";
@@ -160,14 +131,6 @@ function main() {
         sidebarMinimized = !sidebarMinimized;
     });
 
-    function toggleTextVisibility() {
-        if (sidebar.offsetWidth < 100) {
-            titles.forEach(title => title.style.display = 'none');
-        } else {
-            titles.forEach(title => title.style.display = 'block');
-        }
-    }
-
     //sidebar minimize 
 
     toggleTextVisibility();
@@ -175,6 +138,7 @@ function main() {
     window.addEventListener('resize', toggleTextVisibility);
 }
 
+// Menu 
 function resetMenus(menuItems, submenuGroups) {
     menuItems.forEach(ele => {
         ele.style.borderRadius = "";
@@ -184,6 +148,7 @@ function resetMenus(menuItems, submenuGroups) {
     submenuGroups.forEach(ele => {
         ele.style.display = "none";
     })
+    menuActive = false;
 }
 
 window.onload = main;

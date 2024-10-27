@@ -16,8 +16,7 @@ class Nodes {
             selectionNodeClone.setAttribute("cy", positionArray[i][1]);     
             selectionNodeClone.addEventListener("mousedown", onArrowStart);   
             selectionNodeClone.style.display = "block"
-            
-            this.nodeArray.push(selectionNodeClone)
+            this.nodeArray.push(selectionNodeClone);
         }
 
         function getMousePositionSVG(ev) {

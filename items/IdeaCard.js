@@ -12,25 +12,45 @@ const RESIZE_ELEMENT_BORDER_WIDTH = 1.5; // Pull from CSS
  */
 let TITLE_INPUT;
 let editingCard = null;
-let selected = false;
+const selectedCards = [];
 
 class IdeaCard {
+    static initialize() {
+        TITLE_INPUT = document.getElementById("title-input");
+        TITLE_INPUT.addEventListener("input", () => { 
+            if(editingCard) {
+                editingCard.title = TITLE_INPUT.value;
+            }
+        });
+
+        Array.from(document.getElementsByClassName("dropdown-item")).forEach((v) => {
+            const c = v.style.background.match(/linear-gradient\((\w+) 60%, white\)/)[1];
+
+            v.addEventListener("click", () => {
+                while (selectedCards.length > 0) {
+                    selectedCards[0].color = c;
+                    selectedCards[0].deselect();
+                }
+            });
+        });
+
+
+    }
 
     static cardArray = []
     
     constructor() {
         if(!TITLE_INPUT) {
-            TITLE_INPUT = document.getElementById("title-input");
-            TITLE_INPUT.addEventListener("input", () => { 
-                if(editingCard) {
-                    editingCard.title = TITLE_INPUT.value;
-                }
-            });
+            IdeaCard.initialize();
         }
 
         this.groupElement = document.createElementNS("http://www.w3.org/2000/svg", "g");
         this.cardElement = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         this.titleElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+
+        this.selected = false;
+
+        this._color = "#ababab";
 
         this.arrows = [];
 
@@ -157,12 +177,13 @@ class IdeaCard {
 
         function OnDoubleClick() {
             if(!scope.containerElement) {
-                deselect();
+                scope.deselect();
                 return;
-            }   
+            }
+
             editingCard = scope;
 
-            scope.toggleSelect();
+            scope.toggleSelection();
             TITLE_INPUT.value = scope.title;
             TITLE_INPUT.focus();
         }
@@ -179,18 +200,28 @@ class IdeaCard {
         this.titleElement.addEventListener("click", OnClick);
     }
 
-    toggleSelect() {
-        selected =! selected;
-        if (selected) {
-            this.cardElement.style.stroke = "green";
-        } else {
+    deselect() {
+        if(this.selected) {
+            selectedCards.splice(selectedCards.indexOf(this), 1);
             this.cardElement.style.stroke = "#ababab";
+            this.selected = false;
         }
     }
 
-    deselect() {
-        selected = false;
-        this.cardElement.style.stroke = "#ababab";
+    select() {
+        if(!this.selected) {
+            selectedCards.push(this);
+            this.cardElement.style.stroke = "#000000";
+            this.selected = true;
+        }
+    }
+
+    toggleSelection() {
+        if(this.selected) {
+            this.deselect();
+        } else {
+            this.select();
+        }
     }
 
     getScaleFactor() {
@@ -322,6 +353,18 @@ class IdeaCard {
     get textLength() {
         return this.titleElement.getComputedTextLength();
     }
-    
+
+    set color(color) {
+        let oldColor = this._color;
+
+        this._color = color;
+        this.cardElement.style.fill = color;
+
+        Groups.updateColorGroup(oldColor, this);
+    }
+
+    get color() {
+        return this._color;
+    }
 }
 

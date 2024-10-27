@@ -6,6 +6,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/3.0.9/umd.js" integrity="sha512-Wu9XXg78PiNE0DI4Z80lFKlEpLq7yGjquc0I35Nz+sYmSs4/oNHaSW8ACStXBoXciqwTLnSINqToeWP3iNDGmQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- svg-exportJS plugin -->
         <script src="https://sharonchoong.github.io/svg-exportJS/svg-export.min.js"></script>
+        <script src="./items/Groups.js"></script>
         <script src="./items/IdeaCard.js"></script>
         <script src="./items/Arrows.js"></script>
         <script src="./items/Nodes.js"></script>
@@ -24,34 +25,34 @@
                 </div>
 
                 <div class="header-submenu">
-                    <div class="submenu file">
-                        <div class="submenu-option">
+                    <div class="submenu">
+                        <div class="submenu-option push">
                             <i class="fa-solid fa-hippo"></i>
                             <p1>New</p1>
                             <p2>Ctrl + N</p2>
                         </div>
-                        <div class="submenu-option">
+                        <div class="submenu-option push">
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Open</p1>
                             <p2>Ctrl + O</p2>
                         </div>
-                        <div class="submenu-option">
+                        <div class="submenu-option push">
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Copy</p1>
                         </div>
 
                         <div class="submenu-divider"></div>
 
-                        <div class="submenu-option">
+                        <div class="submenu-option push">
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Email</p1>
                         </div>
-                        <div class="submenu-option">                            
+                        <div class="submenu-option push">                            
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Save</p1>
                             <p2>Ctrl + S</p2>
                         </div>
-                        <div class="submenu-option">
+                        <div class="submenu-option push">
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Print</p1>
                             <p2>Ctrl + P</p2>
@@ -59,44 +60,44 @@
 
                         <div class="submenu-divider"></div>
 
-                        <div class="submenu-option">
+                        <div class="submenu-option push">
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Rename</p1>
                         </div>
-                        <div class="submenu-option">                            
+                        <div class="submenu-option push">                            
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Delete</p1>
                         </div>
                     </div>
-                    <div class="submenu tools" style="margin-left: -2vw;">
-                        <div class="submenu-option">                       
+                    <div class="submenu" style="margin-left: -2vw;">
+                        <div class="submenu-option push">                       
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Auto Format</p1>
                         </div>               
-                        <div class="submenu-option">                            
+                        <div class="submenu-option push">                            
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Form Connections</p1>
                         </div>
                     </div>
-                    <div class="submenu view" style="margin-left: 2vw;">
-                        <div class="submenu-option">
+                    <div class="submenu" style="margin-left: 2vw;">
+                        <div class="submenu-option push">
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Zoom In</p1>
                         </div>
-                        <div class="submenu-option">
+                        <div class="submenu-option push">
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Zoom Out</p1>
                         </div>
 
                         <div class="submenu-divider"></div>
 
-                        <div class="submenu-option">
+                        <div class="submenu-option push" id="fullscreen">
                             <i class="fa-solid fa-hippo"></i>
                             <p1>Fullscreen</p1>
                         </div>
                     </div>
-                    <div class="submenu help" style="margin-left: 6vw;">
-                        <div class="submenu-option">
+                    <div class="submenu" style="margin-left: 6vw;">
+                        <div class="submenu-option push">
                             <i class="fa-solid fa-hippo"></i>
                             <p1>AHHHHHHHHHH!</p1>
                         </div>
@@ -113,38 +114,53 @@
                 </div>
 
             </header>
+            <!-- <i class="fa-solid fa-caret-down return-header"></i> -->
             <div class="content-wrapper">
                 <div class="sidebar-container">
                     <!-- Sidebar content -->
                     <g class="sidebar-header">
                         <h1>Groups</h1>
-                        <hr>
+                        <div class="arrow-filter-container">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+                        </div>
+                        <div class="color-filter-container">
+                            <div class="color-filter-border">
+                                <div class="color-filter-icon"></div>
+                            </div>
+                        </div>
                     </g>
+
+                    <hr>
                 
                     <li class="group-container">
-                        <div class="group-element-container">
-                            <div class="element-icon"></div>
-                            <h1 class="element-title">Group 1</h1>
-                            <ion-icon name="close-outline"></ion-icon>
-                        </div>
-                        <div class="group-element-container">
-                            <div class="element-icon"></div>
-                            <h1 class="element-title">Group 2</h1>
-                            <ion-icon name="close-outline"></ion-icon>
-                        </div>
-                        <div class="group-element-container">
-                            <div class="element-icon"></div>
-                            <h1 class="element-title">Group 3</h1>
-                            <ion-icon name="close-outline"></ion-icon>
-                        </div>
-                        <div class="group-element-container">
-                            <div class="element-icon"></div>
-                            <h1 class="element-title">Group 4</h1>
-                            <ion-icon name="close-outline"></ion-icon>
-                        </div>
                     </li>
                     <div class="minimize-icon-container">
                         <ion-icon name="chevron-back-outline" class="minimize-icon"></ion-icon>
+                    </div>
+                </div>
+                <div class="stylebar-container">
+                    <div class="color-picker">
+                        <ion-icon name="color-fill-outline"></ion-icon>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item" style="background: linear-gradient(red 60%, white);"></li>
+                            <li class="dropdown-item" style="background: linear-gradient(blue 60%, white);"></li>
+                            <li class="dropdown-item" style="background: linear-gradient(green 60%, white);"></li>
+                            <li class="dropdown-item" style="background: linear-gradient(yellow 60%, white);"></li>
+                            <li class="dropdown-item" style="background: linear-gradient(orange 60%, white);"></li>
+                            <li class="dropdown-item" style="background: linear-gradient(purple 60%, white);"></li>
+                            <li class="dropdown-item" style="background: linear-gradient(pink 60%, white);"></li>
+                            <li class="dropdown-item" style="background: linear-gradient(cyan 60%, white);"></li>
+                            <li class="dropdown-item" style="background: linear-gradient(magenta 60%, white);"></li>
+                            <li class="dropdown-item" style="background: linear-gradient(lime 60%, white);"></li>
+                        </ul>
+                    </div>
+                    <div class="text-editor">
+                        <ion-icon name="text-outline"></ion-icon>
+                        <ul class="dropdown-menu">
+                            <input type="text" placeholder="15" class="text-size-field">Font Size</li>
+                            <input type="checkbox" class="text-dropdown-item">Bold</li>
+                            <input type="checkbox" class="text-dropdown-item">Italic</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="element-container">
@@ -156,7 +172,7 @@
                 </div>
             </div>
             <div class="add-circle-container">
-                <ion-icon name="add-circle-outline"></ion-icon>
+                +
             </div>
             <footer>
                 
