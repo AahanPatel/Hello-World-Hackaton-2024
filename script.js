@@ -66,6 +66,7 @@ function main() {
     const sidebarMinimizeIcon = document.getElementsByClassName("minimize-icon");
     var sidebarMinimized = false;
 
+    //for sidebar window resizing
     //for sidebar window resizing 
     const sidebar = document.querySelector('.sidebar-container');
     const titles = document.querySelectorAll('.group-element-container .element-title');
@@ -79,34 +80,12 @@ function main() {
         });
     });
 
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 11", "rgb(100, 50, 200)");
-    createGroup("Group 11", "rgb(100, 50, 200)");
-    createGroup("Group 11", "rgb(100, 50, 200)");
-    createGroup("Group 11", "rgb(100, 50, 200)");
-    createGroup("Group 11", "rgb(100, 50, 200)");
-
     function createGroup(groupTitle, iconColor) {
         const groupElementContainer = document.createElement('div');
         groupElementContainer.classList.add('group-element-container');
+
+        const cardHeaderElement = document.createElement('div');
+        cardHeaderElement.classList.add('card-header-element');
 
         const elementIcon = document.createElement('div');
         elementIcon.classList.add('element-icon');
@@ -119,9 +98,33 @@ function main() {
         const closeIcon = document.createElement('ion-icon');
         closeIcon.setAttribute('name', 'close-outline');
 
-        groupElementContainer.appendChild(elementIcon);
-        groupElementContainer.appendChild(heading);
-        groupElementContainer.appendChild(closeIcon);
+        cardHeaderElement.appendChild(elementIcon);
+        cardHeaderElement.appendChild(heading);
+        cardHeaderElement.appendChild(closeIcon);
+
+        const listContainer = document.createElement('ul');
+
+        /* example list elements */
+
+        const cardOne = document.createElement('li'); 
+        const textNodeOne = document.createTextNode("card 1");
+        cardOne.appendChild(textNodeOne);
+
+        const cardTwo = document.createElement('li'); 
+        const textNodeTwo = document.createTextNode("card 2");
+        cardTwo.appendChild(textNodeTwo);
+
+        const cardThree = document.createElement('li');
+        const textNodeThree = document.createTextNode("card 3");
+        cardThree.appendChild(textNodeThree);
+
+
+        listContainer.appendChild(cardOne);
+        listContainer.appendChild(cardTwo);
+        listContainer.appendChild(cardThree);
+
+        groupElementContainer.appendChild(cardHeaderElement);
+        groupElementContainer.appendChild(listContainer);
 
         document.querySelector('.group-container').appendChild(groupElementContainer);
         const titles = document.querySelectorAll('.group-element-container .element-title');
@@ -168,14 +171,6 @@ function main() {
         }
         sidebarMinimized = !sidebarMinimized;
     });
-
-    function toggleTextVisibility() {
-        if (sidebar.offsetWidth < 100) {
-            titles.forEach(title => title.style.display = 'none');
-        } else {
-            titles.forEach(title => title.style.display = 'block');
-        }
-    }
 
     //sidebar minimize 
 
