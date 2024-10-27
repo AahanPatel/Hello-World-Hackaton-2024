@@ -178,6 +178,7 @@ body, html {
     font-size: 14px;
     fill: #555;
     padding: 4px;
+    dominant-baseline: hanging;
 }
 
 .idea-card-resize {
