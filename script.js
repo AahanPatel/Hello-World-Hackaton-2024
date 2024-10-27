@@ -74,7 +74,6 @@ function main() {
 
     const submenuActions = {
         "New": () => createCard(100, 100, 50, 50, "New Idea"),
-        "Open": () => alert("Open functionality to be implemented."),
         "Copy": () => alert("Copy functionality to be implemented."),
         "Save": () => saveFile("download", "svg"),
         "Print": () => window.print(),
