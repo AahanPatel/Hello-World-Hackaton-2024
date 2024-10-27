@@ -126,6 +126,8 @@ function main() {
         document.querySelector('.group-container').appendChild(groupElementContainer);
         const titles = document.querySelectorAll('.group-element-container .element-title');
 
+        requestAnimationFrame(() => groupElementContainer.classList.add('applied-styles'));
+
         groupElementContainer.addEventListener('click', () => {
             //stuff here
         });

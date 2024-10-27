@@ -283,7 +283,7 @@ body, html {
 }
 
 .group-element-container ion-icon:hover {
-    font-size: 25px;
+    transform: scale(125%);
     color: red;
 }
 
