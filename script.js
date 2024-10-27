@@ -1,4 +1,5 @@
 let menuActive = false;
+let zoomLevel = 1;
 
 function main() {
     const whiteboard = document.getElementById("whiteboard");
@@ -70,7 +71,13 @@ function main() {
             "Save": () => saveFile("download", "svg"),
             "Print": () => window.print(),
             "Rename": () => alert("Rename functionality to be implemented."),
-            "Delete": () => alert("Rename functionality to be implemented.")
+            "Delete": () => {
+                IdeaCard.cardArray.forEach(element => {
+                    if (element.selected) {
+                        element.remove()
+                    }
+                })
+            }
         }
         
         const submenuOptionList = document.getElementsByClassName("submenu-option")
