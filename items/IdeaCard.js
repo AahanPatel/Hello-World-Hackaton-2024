@@ -12,8 +12,10 @@ const RESIZE_ELEMENT_BORDER_WIDTH = 1.5; // Pull from CSS
  */
 let TITLE_INPUT;
 let editingCard = null;
+let selected = false;
 
 class IdeaCard {
+
     constructor() {
         if(!TITLE_INPUT) {
             TITLE_INPUT = document.getElementById("title-input");
@@ -88,7 +90,7 @@ class IdeaCard {
                 scope.containerElement.addEventListener("mouseup", OnMouseUp);
 
                 sc = scope.getScaleFactor();
-            }
+            } 
         }
 
         function OnMouseMove(ev) {
@@ -123,7 +125,7 @@ class IdeaCard {
                 scope.containerElement.addEventListener("mouseup", OnMouseUp);
                 sc = scope.getScaleFactor();
                 ev.stopPropagation();
-            }
+            } 
         }
 
         function OnMouseMove(ev) {
@@ -148,17 +150,19 @@ class IdeaCard {
         const scope = this;
 
         function OnDoubleClick() {
-            if(!scope.containerElement)
+            if(!scope.containerElement) {
+                deselect();
                 return;
-
+            }   
             editingCard = scope;
 
+            scope.toggleSelect();
             TITLE_INPUT.value = scope.title;
             TITLE_INPUT.focus();
         }
 
         function OnClick() {
-            if(editingCard)
+            if(editingCard) 
                 editingCard = null;
         }
 
@@ -167,6 +171,20 @@ class IdeaCard {
 
         this.cardElement.addEventListener("click", OnClick);
         this.titleElement.addEventListener("click", OnClick);
+    }
+
+    toggleSelect() {
+        selected =! selected;
+        if (selected) {
+            this.cardElement.style.stroke = "green";
+        } else {
+            this.cardElement.style.stroke = "#ababab";
+        }
+    }
+
+    deselect() {
+        selected = false;
+        this.cardElement.style.stroke = "#ababab";
     }
 
     getScaleFactor() {
@@ -298,4 +316,6 @@ class IdeaCard {
     get textLength() {
         return this.titleElement.getComputedTextLength();
     }
+    
 }
+
