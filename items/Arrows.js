@@ -3,8 +3,11 @@ const ARROW_HEAD_LENGTH = 15;
 const ARROW_HEAD_ANGLE = 30; // Degrees on either side of the shaft
 const DEFAULT_DASH_SIZE = 10;
 const DEFAULT_DOT_DISTANCE = 4;
+const ARROW_OFFSET_DISTANCE = 10;
 
 const ARROW_HEAD_ANGLE_RADIANS = ARROW_HEAD_ANGLE * Math.PI / 180; // DO NOT CHANGE THIS
+
+const arrows = [];
 
 function intersectAABB(rayOrigin, rayDir, boxMin, boxMax) {
     const tMin = boxMin.map((v, i) => (v - rayOrigin[i]) / rayDir[i]);
@@ -28,6 +31,8 @@ class Arrow {
 
         this._startPoint = [0, 0];
         this._endPoint = [0, 0];
+
+        arrows.push(this);
     }
 
     addTo(element) {
@@ -43,10 +48,34 @@ class Arrow {
         this.fromCard = from;
         this.toCard = to;
 
-        this.fromCard.arrows.push(this);
-        this.toCard.arrows.push(this);
+        if(this.fromCard !== null && this.toCard !== null) {
+            this.fromCard.arrows.push(this);
+            this.toCard.arrows.push(this);
 
-        this.updateFromSetCards();
+            this.updateFromSetCards();
+        }
+    }
+
+    pointInBounds(point) {
+        const [sx, sy] = this._startPoint;
+        const [ex, ey] = this._endPoint;
+
+        const dx = ex - sx;
+        const dy = ey - sy;
+
+        const tx = point.x - sx;
+        const ty = point.y - sy;
+
+        const magSq = (dx * dx + dy * dy);
+
+        const t = (dx * tx + dy * ty) / magSq;
+
+        if(t < 0 || t > 1)
+            return false;
+
+        const d = Math.sqrt(tx * tx + ty * ty - t * t * magSq);
+
+        return d < ARROW_HEAD_LENGTH * Math.sin(ARROW_HEAD_ANGLE_RADIANS);
     }
 
     updateFromSetCards() {
@@ -68,8 +97,8 @@ class Arrow {
         const dirX = (cx2 - cx1) / m;
         const dirY = (cy2 - cy1) / m;
 
-        const int1 = intersectAABB([cx1, cy1], [dirX, dirY], [x1, y1], [x1 + w1, y1 + h1])[1] + 10;
-        const int2 = intersectAABB([cx1, cy1], [dirX, dirY], [x2, y2], [x2 + w2, y2 + h2])[0] - 10;
+        const int1 = intersectAABB([cx1, cy1], [dirX, dirY], [x1, y1], [x1 + w1, y1 + h1])[1] + ARROW_OFFSET_DISTANCE;
+        const int2 = intersectAABB([cx1, cy1], [dirX, dirY], [x2, y2], [x2 + w2, y2 + h2])[0] - ARROW_OFFSET_DISTANCE;
 
         if(int2 > int1) {
             this._startPoint[0] = cx1 + dirX * int1;
@@ -84,6 +113,16 @@ class Arrow {
         }
 
         this._recalculateArrow();
+    }
+
+    remove() {
+        this.arrowElement.remove();
+
+        const ind = arrows.indexOf(this);
+
+        if(ind != -1) {
+            arrows.splice(ind, 1);
+        }
     }
 
     get startX() {

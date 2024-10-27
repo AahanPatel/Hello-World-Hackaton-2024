@@ -27,10 +27,31 @@ class Nodes {
             return point;
         }
 
+        const Arrows = [ SolidArrow, DashedArrow, DottedArrow ];
+
         function onArrowStart(ev) {
             ev.target.removeEventListener("mousedown", onArrowStart);
             whiteboard.addEventListener("mouseup", onArrowEnd);
-            arrow = new SolidArrow()
+            let tArrow = new SolidArrow();
+            arrow = tArrow;
+
+            whiteboard.addEventListener("dblclick", (ev) => {
+                const point = getMousePositionSVG(ev);
+
+                if(tArrow.pointInBounds(point)) {
+                    tArrow.remove();
+
+                    const temp = new Arrows[(Arrows.indexOf(tArrow.constructor) + 1) % 3];
+
+                    temp.setBetweenCards(tArrow.fromCard, tArrow.toCard);
+                    tArrow.setBetweenCards(null, null);
+
+                    tArrow = temp;
+                    tArrow.addTo(whiteboard);
+
+                }
+            });
+
             arrow.addTo(whiteboard)
             console.log("Draw arrow start")
             arrow.setStartPoint(ev.target.cx.baseVal.value, ev.target.cy.baseVal.value)

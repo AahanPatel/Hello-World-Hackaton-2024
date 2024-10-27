@@ -253,6 +253,15 @@ class IdeaCard {
         }
     }
 
+    remove() {
+        this.groupElement.remove();
+
+        for(const arrow of this.arrows) {
+            arrow.remove();
+            arrow.setBetweenCards(null, null);
+        }
+    }
+
     getScaleFactor() {
         if(!this.containerElement)
             return 0;
