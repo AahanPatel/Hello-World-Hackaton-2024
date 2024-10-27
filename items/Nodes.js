@@ -1,10 +1,13 @@
 class Nodes {
     static selectionNode = document.getElementById("selectionNode")
+    static whiteboard = document.getElementById("whiteboard")
     nodeArray = []
 
     appendNodes(cardElementClass) {
         var positionArray = [[cardElementClass.width/2 + cardElementClass.x, cardElementClass.y], [cardElementClass.width/2 + cardElementClass.x, cardElementClass.y  + cardElementClass.height], [cardElementClass.x, cardElementClass.y + cardElementClass.height/2], [cardElementClass.x + cardElementClass.width, cardElementClass.y + cardElementClass.height/2]]
         var selectionNodeClone
+        var arrow
+
         for (var i=0; i < positionArray.length; i++) {
             selectionNodeClone = selectionNode.cloneNode(true)
             cardElementClass.groupElement.append(selectionNodeClone)
@@ -17,18 +20,39 @@ class Nodes {
             this.nodeArray.push(selectionNodeClone)
         }
 
+        function getMousePositionSVG(ev) {
+            var point = whiteboard.createSVGPoint();
+            point.x = ev.clientX;
+            point.y = ev.clientY;
+            point = point.matrixTransform(whiteboard.getScreenCTM().inverse());
+            return point;
+        }
+
         function onArrowStart(ev) {
-            selectionNodeClone.removeEventListener("mousedown", onArrowStart);
-            selectionNodeClone.addEventListener("mouseup", onArrowEnd);
+            ev.target.removeEventListener("mousedown", onArrowStart);
+            whiteboard.addEventListener("mouseup", onArrowEnd);
+            arrow = new SolidArrow()
+            arrow.addTo(whiteboard)
             console.log("Draw arrow start")
-            // Implement arrow drawing functionality here. 
+            arrow.setStartPoint(ev.target.cx.baseVal.value, ev.target.cy.baseVal.value)
+            whiteboard.addEventListener('mousemove', onArrowMove)
+        }
+
+        function onArrowMove(ev) {
+            var mousePos = getMousePositionSVG(ev)
+            arrow.setEndPoint(mousePos.x, mousePos.y)
+            IdeaCard.cardArray.forEach(element => {
+                if (element.hover) {
+                    arrow.setBetweenCards(cardElementClass, element)
+
+                }
+            });
         }
 
         function onArrowEnd(ev) {
-            selectionNodeClone.removeEventListener("mouseup", onArrowEnd);
-            selectionNodeClone.addEventListener("mousedown", onArrowStart);
-            console.log("Draw arrow end")
-            // Implement arrow drawing functionality here. 
+            whiteboard.removeEventListener('mousemove', onArrowMove)
+            whiteboard.removeEventListener("mouseup", onArrowEnd);
+            ev.target.addEventListener("mousedown", onArrowStart);
         }
     }
 

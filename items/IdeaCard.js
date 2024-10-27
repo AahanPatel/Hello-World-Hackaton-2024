@@ -16,6 +16,8 @@ let selected = false;
 
 class IdeaCard {
 
+    static cardArray = []
+    
     constructor() {
         if(!TITLE_INPUT) {
             TITLE_INPUT = document.getElementById("title-input");
@@ -47,6 +49,8 @@ class IdeaCard {
         this.nodes = new Nodes()
 
         this.addEvents();
+        this.hover = false
+        IdeaCard.cardArray.push(this)
     }
 
     addTo(element) {
@@ -67,11 +71,13 @@ class IdeaCard {
         function OnMouseEnter() {
             scope.cardElement.removeEventListener("mouseenter", OnMouseEnter);
             scope.cardElement.addEventListener("mouseleave", OnMouseExit);
+            scope.hover = true
             scope.nodes.appendNodes(scope)
         }
 
         function OnMouseExit() {
             scope.nodes.dissolveNodes()
+            scope.hover = false
             scope.cardElement.removeEventListener("mouseleave", OnMouseExit);
             scope.cardElement.addEventListener("mouseenter", OnMouseEnter);
         }
