@@ -66,74 +66,7 @@ function main() {
     const sidebarMinimizeIcon = document.getElementsByClassName("minimize-icon");
     var sidebarMinimized = false;
 
-    //for sidebar window resizing 
-    const sidebar = document.querySelector('.sidebar-container');
-    const titles = document.querySelectorAll('.group-element-container .element-title');
-
-
-    const groupButtons = document.getElementsByClassName('group-element-container');
-
-    groupButtons.forEach((element, index) => {
-        element.addEventListener('click', () => {
-            console.log(`Element ${index + 1} clicked`);
-        });
-    });
-
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 10", "rgb(100, 200, 20)");
-    createGroup("Group 11", "rgb(100, 50, 200)");
-    createGroup("Group 11", "rgb(100, 50, 200)");
-    createGroup("Group 11", "rgb(100, 50, 200)");
-    createGroup("Group 11", "rgb(100, 50, 200)");
-    createGroup("Group 11", "rgb(100, 50, 200)");
-
-    function createGroup(groupTitle, iconColor) {
-        const groupElementContainer = document.createElement('div');
-        groupElementContainer.classList.add('group-element-container');
-
-        const elementIcon = document.createElement('div');
-        elementIcon.classList.add('element-icon');
-        elementIcon.style.backgroundColor = iconColor;
-
-        const heading = document.createElement('h1');
-        heading.textContent = groupTitle;
-        heading.classList.add('element-title');
-
-        const closeIcon = document.createElement('ion-icon');
-        closeIcon.setAttribute('name', 'close-outline');
-
-        groupElementContainer.appendChild(elementIcon);
-        groupElementContainer.appendChild(heading);
-        groupElementContainer.appendChild(closeIcon);
-
-        document.querySelector('.group-container').appendChild(groupElementContainer);
-        const titles = document.querySelectorAll('.group-element-container .element-title');
-
-        requestAnimationFrame(() => groupElementContainer.classList.add('applied-styles'));
-
-        groupElementContainer.addEventListener('click', () => {
-            //stuff here
-        });
-
-        toggleTextVisibility();
-    }
+    //for sidebar window resizing
 
     addButton.addEventListener("click", () => {
         const card = new IdeaCard();
@@ -168,14 +101,6 @@ function main() {
         }
         sidebarMinimized = !sidebarMinimized;
     });
-
-    function toggleTextVisibility() {
-        if (sidebar.offsetWidth < 100) {
-            titles.forEach(title => title.style.display = 'none');
-        } else {
-            titles.forEach(title => title.style.display = 'block');
-        }
-    }
 
     //sidebar minimize 
 
