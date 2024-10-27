@@ -212,6 +212,7 @@ class IdeaCard {
         if(!this.selected) {
             selectedCards.push(this);
             this.cardElement.style.stroke = "#000000";
+            this.cardElement.style.strokeWidth = "2.5px";
             this.selected = true;
         }
     }
