@@ -66,6 +66,7 @@ function main() {
     const sidebarMinimizeIcon = document.getElementsByClassName("minimize-icon");
     var sidebarMinimized = false;
 
+    //for sidebar window resizing
     //for sidebar window resizing 
     const sidebar = document.querySelector('.sidebar-container');
     const titles = document.querySelectorAll('.group-element-container .element-title');
@@ -195,14 +196,6 @@ function main() {
         }
         sidebarMinimized = !sidebarMinimized;
     });
-
-    function toggleTextVisibility() {
-        if (sidebar.offsetWidth < 100) {
-            titles.forEach(title => title.style.display = 'none');
-        } else {
-            titles.forEach(title => title.style.display = 'block');
-        }
-    }
 
     //sidebar minimize 
 
