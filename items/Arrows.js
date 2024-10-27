@@ -35,6 +35,16 @@ class Arrow {
     }
 
     setBetweenCards(from, to) {
+        if (to == null) {
+            this.toCard = new IdeaCard()
+            toCard.addTo(whiteboard);
+            toCard.width = width
+            toCard.height = height;
+            toCard.x = x
+            toCard.y = y
+            toCard.title = title;
+            card.push(card);
+        }
         if(this.fromCard !== null && this.toCard !== null) {
             this.fromCard.arrows.splice(this.fromCard.arrows.indexOf(this), 1);
             this.toCard.arrows.splice(this.toCard.arrows.indexOf(this), 1);

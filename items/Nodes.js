@@ -6,7 +6,7 @@ class Nodes {
     appendNodes(cardElementClass) {
         var positionArray = [[cardElementClass.width/2 + cardElementClass.x, cardElementClass.y], [cardElementClass.width/2 + cardElementClass.x, cardElementClass.y  + cardElementClass.height], [cardElementClass.x, cardElementClass.y + cardElementClass.height/2], [cardElementClass.x + cardElementClass.width, cardElementClass.y + cardElementClass.height/2]]
         var selectionNodeClone
-        var arrow
+        var arrow 
 
         for (var i=0; i < positionArray.length; i++) {
             selectionNodeClone = selectionNode.cloneNode(true)
@@ -42,6 +42,9 @@ class Nodes {
             arrow.setEndPoint(mousePos.x, mousePos.y)
             IdeaCard.cardArray.forEach(element => {
                 if (element.hover) {
+                    if (cardElementClass == element) {
+                        return 
+                    }
                     arrow.setBetweenCards(cardElementClass, element)
 
                 }
