@@ -89,6 +89,7 @@ body, html {
     top:4vh;
     display: flex;
 }
+
 .submenu{
     width: 14vw;
     margin-left: -6vw;
@@ -381,8 +382,9 @@ ion-icon {
 
 .element-container {
     flex: 1;
-    padding: 1em;
+    padding: none;
     background-color: #f4f4f4;
+    width: 100% 
 }
 
 /* end sidebar styling */
