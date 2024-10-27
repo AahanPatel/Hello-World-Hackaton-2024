@@ -97,8 +97,6 @@ class IdeaCard {
         this.addHoverEvents()
     }
 
-    
-
     addHoverEvents() {
         const scope = this; 
 
