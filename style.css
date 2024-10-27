@@ -311,10 +311,6 @@ body, html {
 
 .group-element-container ul {
     display: none;
-}
-
-.group-element-container:hover ul {
-    display: flex;
     flex-direction: column;
     list-style-type: none;
     justify-content: center;

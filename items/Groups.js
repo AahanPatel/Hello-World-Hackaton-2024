@@ -77,6 +77,7 @@ function createGroup(groupTitle, iconColor) {
     })
 
     groupElementContainer.addEventListener('click', () => {
+
         if(editing) {
             heading.contentEditable = false;
             heading.blur();
@@ -86,6 +87,7 @@ function createGroup(groupTitle, iconColor) {
         }
 
         if(colorMap[iconColor].selected) {
+            listContainer.style.display = "none";
             for(const color in colorMap) {
                 colorMap[color].forEach((card) => {
                     card.cardElement.style.fillOpacity = "100%";
@@ -97,6 +99,7 @@ function createGroup(groupTitle, iconColor) {
 
             colorMap[iconColor].selected = false;
         } else {
+            listContainer.style.display = "flex";
             for(const color in colorMap) {
                 colorMap[color].selected = false;
                 colorMap[color].forEach((card) => {
