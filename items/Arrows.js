@@ -222,14 +222,14 @@ class DottedArrow extends Arrow {
         let dirX = Math.cos(ang);
         let dirY = Math.sin(ang);
 
-        const low = ang - Math.PI / 6;
-        const high = ang + Math.PI / 6;
+        const low = ang - ARROW_HEAD_ANGLE_RADIANS;
+        const high = ang + ARROW_HEAD_ANGLE_RADIANS;
 
-        const pt1x = endX - Math.cos(low) * 15;
-        const pt1y = endY - Math.sin(low) * 15;
+        const pt1x = endX - Math.cos(low) * ARROW_HEAD_LENGTH;
+        const pt1y = endY - Math.sin(low) * ARROW_HEAD_LENGTH;
 
-        const pt2x = endX - Math.cos(high) * 15;
-        const pt2y = endY - Math.sin(high) * 15;
+        const pt2x = endX - Math.cos(high) * ARROW_HEAD_LENGTH;
+        const pt2y = endY - Math.sin(high) * ARROW_HEAD_LENGTH;
 
 
         let pathStr = `M ${startX}, ${startY}`;
