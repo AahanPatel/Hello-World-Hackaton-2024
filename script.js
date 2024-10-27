@@ -45,6 +45,7 @@ function main() {
 
     //Header
     const menuItems = Array.from(document.getElementsByClassName("menu"));
+
     const submenuGroups = Array.from(document.getElementsByClassName("submenu"));
 
     resetMenus(menuItems, submenuGroups);
@@ -68,6 +69,26 @@ function main() {
                 menuItems[i].classList.remove("push");
                 menuActive = true;
             }
+        })
+    }
+
+    const submenuActions = {
+        "New": () => createCard(100, 100, 50, 50, "New Idea"),
+        "Open": () => alert("Open functionality to be implemented."),
+        "Copy": () => alert("Copy functionality to be implemented."),
+        "Save": () => saveFile("download", "svg"),
+        "Print": () => window.print(),
+        "Rename": () => alert("Rename functionality to be implemented."),
+        "Delete": () => alert("Rename functionality to be implemented.")
+    }
+
+    registerSubmenuGroups()
+    function registerSubmenuGroups() {
+        const submenuOptionList = document.getElementsByClassName("submenu-option")
+        submenuOptionList.forEach(element => {
+            element.addEventListener("click", function(ev){
+                submenuActions[element.children[1].innerHTML]();
+            })
         })
     }
 
