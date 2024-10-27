@@ -156,6 +156,11 @@ body, html {
     fill: rgb(233, 243, 243);  
 }
 
+.idea-card:active {
+    fill: rgb(255, 255, 255);  
+    opacity: 0.85;
+}
+
 .group-element {
     transition: 0.5s ease-in;
 }
