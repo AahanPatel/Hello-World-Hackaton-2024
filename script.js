@@ -182,6 +182,53 @@ function main() {
     toggleTextVisibility();
 
     window.addEventListener('resize', toggleTextVisibility);
+
+    document.querySelector('.font-size').addEventListener('blur', function() {
+        if (this.value === '') {
+            this.value = 1; 
+        }
+    });
+
+    document.querySelector('.font-size').addEventListener('input', function() {
+        if (this.value > 999) {
+            this.value = 999; // Cap the value at 999
+        }
+    });
+
+    const stylingList = [
+        {ele: document.querySelector('.font-bold'),
+            active: false},
+        {ele: document.querySelector('.font-italics'),
+            active: false},                
+        {ele: document.querySelector('.font-underline'),
+            active: false},        
+        {ele: document.querySelector('.font-strikethrough'),
+            active: false}
+    ];
+    // document.querySelector('.font-family').addEventListener('click', function() {
+
+    // });
+
+    stylingList.forEach(object => {
+        object.ele.addEventListener('click', function(){
+            if(object.active) {
+                object.active = false;
+                object.ele.classList.remove("style-active");
+            } else {
+                object.active = true;
+                object.ele.classList.add("style-active");               
+            }
+        })
+    })
+
+    document.querySelector(".font-color").addEventListener('click', function(){
+        document.querySelector(".font-color-picker").click();
+    });
+
+    document.querySelector(".font-color-picker").addEventListener('input', function(){
+        document.querySelector(".font-color").style.outline = "solid 0.2vh " + document.querySelector(".font-color-picker").value;
+    });
+
 }
 
 // Menu 
@@ -196,5 +243,7 @@ function resetMenus(menuItems, submenuGroups) {
     })
     menuActive = false;
 }
+
+
 
 window.onload = main;

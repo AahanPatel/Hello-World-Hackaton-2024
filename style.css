@@ -4,6 +4,16 @@
     box-sizing: border-box;
 }
 
+:root {
+    --font-family1: "Times New Roman";
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 body, html {
     height: 100%;
     margin: 0;
@@ -55,7 +65,7 @@ body, html {
 .logo-container {
     height: 4.25vh;
     margin-top: 0.75vh; /*fix when placing actual logo. svgs are weird (that or im stupid)*/
-    margin-right: 1vw;
+    margin-right: 0.75vw;
 }
 
 .header-menu { /*Header left side*/
@@ -389,26 +399,174 @@ ion-icon {
 
 /* start stylebar styling */
 
+.style-active {
+    background-color: #ced6d7;
+    filter: brightness(0.9);
+    cursor: default;
+}
+
 .stylebar-container {
     position: absolute;
-    height: 45px;
+    border-radius: 1.5vh;
+    right: 0.5vw;
+    margin-top: 1vh;
+    height: 30vh;
+    width: 2.5vw;
+    background-color: #F1FBFD;
+    box-shadow: -0.3vw 1vh 1vh rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+    user-select: none;
+    font-family: var(--font-family1);
+    font-size: 2.4vh;
+}
+
+.font-color {
+    height: 1.9vw;
+    margin-left: .3vw;
+    width: 1.9vw;
+    text-align: center;
+    line-height: 1.4vw;
+    margin-top: 0.5vh;
+    border-radius: 1.25vh;
+    outline: solid 0.2vh red;
+    border: solid 0.5vh #F1FBFD;
+    cursor: pointer;
+}
+
+.font-color-picker{
+    position: absolute;
+    right:3vw;
+}
+
+.font-size{
+    margin-top: 0.3vh;
+    font-size: 2.4vh;
+    height: 1.9vw;
+    margin-left: .3vw;
+    width: 1.9vw;   
+    border: none;
+    font-family: var(--font-family1);
+    text-align: center;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 1.25vh;
+
+}
+.font-size:focus{
+    outline: none;
+}
+
+.font-family{
+    height: 1.9vw;
+    margin-left: .3vw;
+    width: 1.9vw;
+    text-align: center;
+    line-height: 1.9vw;
+    margin-top: 0.5vh;
+    border-radius: 1.25vh;
+    cursor: pointer;
+}
+
+.font-bold{
+    height: 1.9vw;
+    margin-left: .3vw;
+    width: 1.9vw;
+    text-align: center;
+    line-height: 1.9vw;
+    margin-top: 0.5vh;
+    border-radius: 1.25vh;
+    cursor: pointer;
+    font-weight: 1000;
+}
+
+.font-italics{
+    height: 1.9vw;
+    margin-left: .3vw;
+    width: 1.9vw;
+    text-align: center;
+    line-height: 1.9vw;
+    margin-top: 0.5vh;
+    border-radius: 1.25vh;
+    cursor: pointer;
+    font-style: italic;
+}
+
+.font-underline{
+    height: 1.9vw;
+    margin-left: .3vw;
+    width: 1.9vw;
+    text-align: center;
+    line-height: 1.9vw;
+    margin-top: 0.5vh;
+    border-radius: 1.25vh;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.font-strikethrough{
+    height: 1.9vw;
+    margin-left: .3vw;
+    width: 1.9vw;
+    text-align: center;
+    line-height: 1.9vw;
+    margin-top: 0.5vh;
+    border-radius: 1.25vh;
+    cursor: pointer;
+    text-decoration:line-through;
+}
+
+.font-family:hover{
+    background-color: #ced6d7;
+}
+.font-strikethrough:hover{
+    background-color: #ced6d7;
+}
+.font-underline:hover{
+    background-color: #ced6d7;
+}
+.font-bold:hover{
+    background-color: #ced6d7;
+}
+.font-italics:hover{
+    background-color: #ced6d7;
+}
+.font-size:hover{
+    background-color: #ced6d7;
+}
+
+.stylebar-container2 {
+    position: absolute;
+    top:35vh;
+    height: 50px;
     margin: 15px 10px;
-    right: 3vw;
+    right: -0.2vw;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+    cursor: pointer;
 }
 
-.stylebar-container div {
+.stylebar-container2 div {
     margin: .5vw;
-    width: 45px;
-    height: 45px;
+    width: 25px;
+    height: 25px;
     flex: none;
     position: relative;
 }
 
-.stylebar-container div ion-icon {
+.color-picker-visual{
+    height:1vw;
+    width: 1vw;
+    background-color: red;
+    outline: solid 0.3vh black;
+    border-radius: 0.8vh;
+    box-shadow: -0.3vw 1vh 1vh rgba(0, 0, 0, 0.5);
+}
+
+.stylebar-container2 div ion-icon {
     color: black;
     font-size: 1.6vw;
     padding: 5px;
@@ -419,30 +577,29 @@ ion-icon {
     transition: 0.3s ease-out;
 }
 
-.stylebar-container .color-picker ion-icon {
-    background: linear-gradient(red 40%, white);
+.stylebar-container2 .color-picker ion-icon {
+    background: red;
 }
 
-.stylebar-container .text-editor ion-icon {
+.stylebar-container2 .text-editor ion-icon {
     background: linear-gradient(rgb(167, 167, 167) 40%, white);
 }
 
-.stylebar-container div:hover ion-icon {
+.stylebar-container2 div:hover ion-icon {
     transform: scale(110%);
     transform: rotateZ(-15deg);
     background: white;
 }
 
-.stylebar-container div:first-child {
+.stylebar-container2 div:first-child {
     margin-left: 0; 
 }
 
 .dropdown-menu {
     display: none;
     position: absolute; 
-    top: 50px; 
-    top: 0;
-    left: 0;
+    top: 34px; 
+    left: -50px;
     background: white; 
     padding: 10px; 
     border-radius: 10px; 
@@ -474,37 +631,6 @@ ion-icon {
     transition: transform 0.3s; 
 }
 
-.text-dropdown-item {
-    width: 30px; 
-    height: 30px;
-    margin: 0 auto;
-    border-radius: 25px;
-}
-
-.text-size-field {
-    width: 30px; 
-    height: 30px;
-    cursor: pointer; 
-    transition: transform 0.3s; 
-    padding: 0 0 0 4px;
-}
-
-.dropdown-item:hover {
-    transform: scale(1.1); 
-}
-
-@media (max-width: 1000px) {
-    .stylebar-container div {
-        max-width: 20px; 
-        max-height: 20px; 
-    }
-
-    .dropdown-item, .text-size-field, .text-dropdown-item {
-        width: 15px;
-        height: 15px;
-    }
-
-}
 
 footer {
     background-color: #ccc;
